@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobility & Mindfulness</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0d1117" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-dark: #0d1117;
+      --card-dark: rgba(255,255,255,0.05);
+      --text-dark: #ffffff;
+      --accent: #7dd3fc;
+      --bg-light: #f7f7f9;
+      --card-light: #ffffffcc;
+      --text-light: #0d0d0d;
+      --tile-radius: 20px;
+      --content-max-width: 960px;
+      --bottom-nav-height: 70px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      transition: background 0.35s, color 0.35s;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,0.02) 0, transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(148,163,184,0.03) 0, transparent 55%),
+        radial-gradient(circle at 0% 100%, rgba(15,23,42,0.18) 0, transparent 60%);
+      opacity: 0.3;
+      mix-blend-mode: soft-light;
+      z-index: -1;
+    }
+
+    body.light-mode {
+      background: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    body.light-mode::before {
+      background-image:
+        radial-gradient(circle at 10% 10%, rgba(0,0,0,0.02) 0, transparent 55%),
+        radial-gradient(circle at 80% 100%, rgba(148,163,184,0.08) 0, transparent 60%);
+      mix-blend-mode: normal;
+      opacity: 0.25;
+    }
+
+    body.reduced-motion * {
+      transition: none !important;
+      animation: none !important;
+    }
+
+    .page-wrap {
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      padding-bottom: calc(var(--bottom-nav-height) + 1.5rem);
+    }
+
+    .hero {
+      padding: 2rem 1.25rem 0.5rem;
+      text-align: center;
+      position: relative;
+      will-change: transform;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+      font-weight: 600;
+      background: linear-gradient(135deg,#7dd3fc,#a5b4fc,#c084fc);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-sub {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .streak-banner {
+      margin-top: 0.35rem;
+      font-size: 0.8rem;
+      opacity: 0.85;
+    }
+
+    .settings-button {
+      position: absolute;
+      top: 1.3rem;
+      right: 1.25rem;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      background: rgba(15,23,42,0.9);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.4);
+    }
+
+    body.light-mode .settings-button {
+      background: rgba(255,255,255,0.95);
+      border-color: #00000022;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    }
+
+    .settings-button span {
+      transform: translateY(-1px);
+    }
+
+    .toggle-wrap {
+      margin: 1rem auto 0;
+      display: inline-flex;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    body.light-mode .toggle-wrap {
+      border-color: #00000022;
+    }
+
+    .toggle-option {
+      padding: 0.4rem 1.1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .toggle-option.active {
+      background: var(--accent);
+      color: #000;
+      font-weight: 600;
+    }
+    .instruction {
+      margin: 0.9rem 1.25rem 1.6rem;
+      text-align: center;
+      font-size: 0.8rem;
+      opacity: 0.65;
+    }
+
+    /* Settings panel */
+    .settings-panel {
+      position: fixed;
+      top: 3.6rem;
+      right: 1.25rem;
+      width: 260px;
+      max-width: calc(100% - 2.5rem);
+      background: rgba(15,23,42,0.98);
+      border-radius: 16px;
+      padding: 0.85rem 1rem 0.9rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.65);
+      border: 1px solid rgba(148,163,184,0.7);
+      z-index: 40;
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+
+    body.light-mode .settings-panel {
+      background: rgba(255,255,255,0.98);
+      border-color: #00000022;
+      box-shadow: 0 18px 36px rgba(0,0,0,0.12);
+    }
+
+    .settings-panel.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .settings-panel-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-bottom: 0.4rem;
+    }
+
+    .settings-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      padding: 0.32rem 0;
+    }
+
+    .settings-row span {
+      max-width: 70%;
+    }
+
+    .settings-row small {
+      display: block;
+      font-size: 0.7rem;
+      opacity: 0.65;
+      margin-top: 0.1rem;
+    }
+
+    .settings-toggle {
+      width: 38px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.9);
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      background: rgba(15,23,42,0.9);
+    }
+
+    body.light-mode .settings-toggle {
+      background: rgba(248,250,252,1);
+      border-color: #00000033;
+    }
+
+    .settings-toggle-knob {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #e5e7eb;
+      transform: translateX(0);
+      transition: transform 0.15s ease;
+    }
+
+    .settings-toggle.active {
+      background: var(--accent);
+      border-color: transparent;
+    }
+
+    .settings-toggle.active .settings-toggle-knob {
+      transform: translateX(14px);
+      background: #0f172a;
+    }
+
+    /* Section styling */
+    .section {
+      margin: 0 0 2.3rem;
+      padding: 0 1.25rem;
+    }
+
+    .section-inner {
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.16em;
+      opacity: 0.85;
+      text-transform: uppercase;
+    }
+
+    .section-sub {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: 0.18rem;
+    }
+
+    .tiles {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 0.7rem;
+    }
+
+    /* Tile base styling */
+    .media-block {
+      width: 100%;
+      background: var(--card-dark);
+      border-radius: var(--tile-radius);
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+      cursor: pointer;
+      transition: 0.25s transform, 0.25s box-shadow, 0.18s opacity;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+      position: relative;
+    }
+
+    body.light-mode .media-block {
+      background: var(--card-light);
+      border-color: #00000022;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+    }
+
+    .media-block:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+    }
+
+    .media-block.hidden {
+      display: none;
+    }
+
+    .media-shell {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #000;
+    }
+
+    .media-shell iframe,
+    .media-shell video,
+    .media-shell audio {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      outline: none;
+    }
+
+    .media-block.audio .media-shell {
+      padding-top: 22%;
+      background: #020617;
+    }
+
+    .media-block.audio .media-shell audio {
+      height: 100% !important;
+      width: 100% !important;
+    }
+
+    .media-shell audio::-webkit-media-controls-enclosure {
+      border-radius: 999px;
+      background-color: rgba(15,23,42,0.96);
+    }
+
+    body.light-mode .media-shell audio::-webkit-media-controls-enclosure {
+      background-color: #ffffff;
+    }
+
+    .media-overlay {
+      position: absolute;
+      inset: 0;
+      padding: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      color: #fff;
+      transition: opacity 0.25s ease, filter 0.25s ease;
+      backdrop-filter: blur(0px);
+    }
+
+    .media-block.revealed .media-overlay {
+      opacity: 0;
+      filter: blur(14px);
+      pointer-events: none;
+    }
+
+    .media-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .media-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-top: 0.15rem;
+    }
+
+    .media-cta {
+      font-size: 0.75rem;
+      opacity: 0.9;
+      margin-top: 0.15rem;
+    }
+              <div class="media-overlay">
+                <div class="media-label">Advanced</div>
+                <div class="media-title">Advanced Mobility 1</div>
+                <div class="media-cta">Tap to play</div>
+              </div>
+            </div>
+
+            <div class="media-block color-5" data-id="advanced-2" onclick="revealMedia(this)">
+              <div class="media-shell">
+                <iframe src="https://www.youtube-nocookie.com/embed/wu_pWv_KgmY?rel=0&modestbranding=1"></iframe>
+              </div>
+              <div class="media-overlay">
+                <div class="media-label">Advanced</div>
+                <div class="media-title">Advanced Mobility 2</div>
+                <div class="media-cta">Tap to play</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- YOGA -->
+      <section class="section">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-title">Yoga</div>
+            <div class="section-sub">Short guided flows to improve flexibility and reset your mind.</div>
+          </div>
+
+          <div class="tiles">
+
+            <div class="media-block color-1" data-id="yoga-1" onclick="revealMedia(this)">
+              <div class="media-shell">
+                <iframe src="https://www.youtube-nocookie.com/embed/sGbsS4bIAiY?rel=0&modestbranding=1"></iframe>
+              </div>
+              <div class="media-overlay">
+                <div class="media-label">Yoga</div>
+                <div class="media-title">10-Min Beginner Flow</div>
+                <div class="media-cta">Tap to play</div>
+              </div>
+            </div>
+
+            <div class="media-block color-2" data-id="yoga-2" onclick="revealMedia(this)">
+              <div class="media-shell">
+                <iframe src="https://www.youtube-nocookie.com/embed/7EoqvZovBDw?rel=0&modestbranding=1"></iframe>
+              </div>
+              <div class="media-overlay">
+                <div class="media-label">Yoga</div>
+                <div class="media-title">Relaxing Stretch Flow</div>
+                <div class="media-cta">Tap to play</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- MEDITATION + NSDR -->
+      <section class="section">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-title">Meditation & NSDR</div>
+            <div class="section-sub">Calm sessions including NSDR to relax your whole system.</div>
+          </div>
+
+          <div class="tiles">
+
+            <!-- NSDR FIRST -->
+            <div class="media-block color-4 audio" data-id="nsdr" onclick="revealMedia(this)">
+              <div class="media-shell">
+                <audio controls controlsList="nodownload noplaybackrate">
+                  <source src="https://drive.google.com/uc?export=download&id=1HbnA2YFRiIzTc7ovgvH4G-mOZOKwdwKx" type="audio/mpeg">
+                </audio>
+              </div>
+              <div class="media-overlay">
+                <div class="media-label">Meditation</div>
+                <div class="media-title">NSDR 10 mins</div>
+                <div class="media-cta">Tap to play</div>
+              </div>
+            </div>
+
+            <!-- Meditation Videos -->
+            <div class="media-block color-2" data-id="med-1" onclick="revealMedia(this)">
+              <div class="media-shell">
+                <iframe src="https://www.youtube-nocookie.com/embed/1ZYbU82GVz4?rel=0&modestbranding=1"></iframe>
+              </div>
+              <div class="media-overlay">
+                <div class="media-label">Meditation</div>
+                <div class="media-title">Deep Relaxation</div>
+                <div class="media-cta">Tap to play</div>
+              </div>
+            </div>
+
+            <div class="media-block color-3" data-id="med-2" onclick="revealMedia(this)">
+              <div class="media-shell">
+                <iframe src="https://www.youtube-nocookie.com/embed/inpok4MKVLM?rel=0&modestbranding=1"></iframe>
+              </div>
+              <div class="media-overlay">
+                <div class="media-label">Meditation</div>
+                <div class="media-title">Breathing Reset</div>
+                <div class="media-cta">Tap to play</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+<script>
+/* ------------------------------
+   SETTINGS DATA STORAGE
+------------------------------ */
+const settings = {
+  autoplay: false,
+  hideWatched: false,
+  reducedMotion: false,
+  watched: new Set()
+};
+
+// Load saved settings
+(function loadSettings() {
+  try {
+    const saved = JSON.parse(localStorage.getItem("appSettings") || "{}");
+    Object.assign(settings, saved, { watched: new Set(saved.watched || []) });
+
+    if (settings.reducedMotion) {
+      document.body.classList.add("reduced-motion");
+    }
+  } catch (e) {}
+})();
+
+function saveSettings() {
+  localStorage.setItem("appSettings", JSON.stringify({
+    autoplay: settings.autoplay,
+    hideWatched: settings.hideWatched,
+    reducedMotion: settings.reducedMotion,
+    watched: [...settings.watched]
+  }));
+}
+
+/* ------------------------------
+   REVEAL MEDIA (TILES)
+------------------------------ */
+function revealMedia(tile) {
+  tile.classList.add("revealed");
+  const id = tile.dataset.id;
+  settings.watched.add(id);
+  saveSettings();
+
+  if (settings.autoplay) {
+    const audio = tile.querySelector("audio");
+    if (audio) audio.play().catch(()=>{});
+  }
+
+  if (settings.hideWatched) {
+    setTimeout(() => tile.classList.add("hidden"), 600);
+  }
+}
+
+function applyHideWatched() {
+  document.querySelectorAll(".media-block").forEach(tile => {
+    const id = tile.dataset.id;
+    if (settings.hideWatched && settings.watched.has(id)) {
+      tile.classList.add("hidden");
+    } else {
+      tile.classList.remove("hidden");
+    }
+  });
+}
+
+/* ------------------------------
+   SETTINGS PANEL INTERACTIONS
+------------------------------ */
+document.getElementById("autoplayToggle").onclick = () => {
+  settings.autoplay = !settings.autoplay;
+  document.getElementById("autoplayToggle").classList.toggle("active", settings.autoplay);
+  saveSettings();
+};
+
+document.getElementById("hideWatchedToggle").onclick = () => {
+  settings.hideWatched = !settings.hideWatched;
+  document.getElementById("hideWatchedToggle").classList.toggle("active", settings.hideWatched);
+  applyHideWatched();
+  saveSettings();
+};
+
+document.getElementById("reducedMotionToggle").onclick = () => {
+  settings.reducedMotion = !settings.reducedMotion;
+  document.body.classList.toggle("reduced-motion", settings.reducedMotion);
+  document.getElementById("reducedMotionToggle").classList.toggle("active", settings.reducedMotion);
+  saveSettings();
+};
+
+// Apply saved settings to toggles
+document.getElementById("autoplayToggle").classList.toggle("active", settings.autoplay);
+document.getElementById("hideWatchedToggle").classList.toggle("active", settings.hideWatched);
+document.getElementById("reducedMotionToggle").classList.toggle("active", settings.reducedMotion);
+
+/* ------------------------------
+   DARK / LIGHT MODE TOGGLE
+------------------------------ */
+const darkToggle = document.getElementById("darkToggle");
+const lightToggle = document.getElementById("lightToggle");
+
+darkToggle.onclick = () => {
+  document.body.classList.remove("light-mode");
+  darkToggle.classList.add("active");
+  lightToggle.classList.remove("active");
+};
+
+lightToggle.onclick = () => {
+  document.body.classList.add("light-mode");
+  lightToggle.classList.add("active");
+  darkToggle.classList.remove("active");
+};
+
+/* ------------------------------
+   SETTINGS PANEL OPEN/CLOSE
+------------------------------ */
+const settingsButton = document.getElementById("settingsButton");
+const settingsPanel = document.getElementById("settingsPanel");
+
+settingsButton.onclick = () => {
+  settingsPanel.classList.toggle("open");
+};
+
+/* ------------------------------
+   PARALLAX HERO
+------------------------------ */
+window.addEventListener("scroll", () => {
+  const y = window.scrollY;
+  document.getElementById("hero").style.setProperty("--parallax-offset", `${y * 0.12}px`);
+});
+
+/* ------------------------------
+   STREAK COUNTER
+------------------------------ */
+(function streakCounter() {
+  const today = new Date().toDateString();
+  const last = localStorage.getItem("lastDay");
+  let streak = parseInt(localStorage.getItem("streak") || "0");
+
+  if (last !== today) {
+    streak += 1;
+    localStorage.setItem("streak", streak);
+    localStorage.setItem("lastDay", today);
+  }
+  document.getElementById("streakBanner").innerText = `Day streak: ${streak}`;
+})();
+
+/* ------------------------------
+   BOTTOM NAVIGATION
+------------------------------ */
+document.querySelectorAll(".nav-item").forEach(item => {
+  item.onclick = () => {
+    document.querySelectorAll(".nav-item").forEach(i => i.classList.remove("active"));
+    item.classList.add("active");
+
+    const target = item.dataset.target;
+    const el = document.getElementById(target);
+    if (el) window.scrollTo({ top: el.offsetTop - 20, behavior: "smooth" });
+  };
+});
+
+/* ------------------------------
+   APPLY hideWatched ON LOAD
+------------------------------ */
+applyHideWatched();
+
+/* ------------------------------
+   SERVICE WORKER (PWA)
+------------------------------ */
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js")
+    .catch(err => console.log("Service worker failed:", err));
+}
+</script>
+
+</div> <!-- end page-wrap -->
+
+<!-- BOTTOM NAV BAR -->
+<div class="bottom-nav">
+  <div class="nav-item active" data-target="hero"><span>🏠</span>Home</div>
+  <div class="nav-item" data-target="beginner-1"><span>🧘</span>Mobility</div>
+  <div class="nav-item" data-target="yoga-1"><span>🌿</span>Yoga</div>
+  <div class="nav-item" data-target="nsdr"><span>💤</span>NSDR</div>
+</div>
+
+</body>
+</html>
