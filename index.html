@@ -329,8 +329,28 @@
     .tiles {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.2rem;
       margin-top: 0.7rem;
+    }
+
+    .carousel {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(240px, 1fr);
+      gap: 0.9rem;
+      overflow-x: auto;
+      padding-bottom: 0.4rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .carousel::-webkit-scrollbar { height: 8px; }
+    .carousel::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.18); border-radius: 999px; }
+
+    .carousel-note {
+      font-size: 0.9rem;
+      opacity: 0.75;
+      margin-bottom: 0.3rem;
     }
 
     /* Tile base styling */
@@ -344,6 +364,7 @@
       transition: 0.25s transform, 0.25s box-shadow, 0.18s opacity;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
       position: relative;
+      scroll-snap-align: start;
     }
 
     body.light-mode .media-block {
@@ -439,6 +460,7 @@
     .color-3 .media-overlay { background: linear-gradient(135deg, rgba(94, 234, 212, 0.8), rgba(125, 211, 252, 0.65)); }
     .color-4 .media-overlay { background: linear-gradient(135deg, rgba(190, 24, 93, 0.8), rgba(100, 116, 139, 0.7)); }
     .color-5 .media-overlay { background: linear-gradient(135deg, rgba(167, 139, 250, 0.8), rgba(56, 189, 248, 0.7)); }
+    .color-6 .media-overlay { background: linear-gradient(135deg, rgba(234, 179, 8, 0.82), rgba(34, 211, 238, 0.7)); }
 
     /* Bottom nav */
     .bottom-nav {
@@ -483,8 +505,8 @@
     }
 
     @media (min-width: 768px) {
-      .tiles { flex-direction: row; flex-wrap: wrap; }
-      .media-block { width: calc(50% - 0.5rem); }
+      .tiles { gap: 1.4rem; }
+      .carousel { grid-auto-columns: minmax(280px, 1fr); }
     }
   </style>
 </head>
@@ -538,81 +560,144 @@
         </div>
 
         <div class="tiles">
-          <div class="media-block color-1" id="beginner-1" data-id="beginner-1" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-            <div class="media-shell">
-              <iframe src="https://www.youtube-nocookie.com/embed/2L2lnxIcNmo?rel=0&modestbranding=1" title="10 Minute Morning Mobility"></iframe>
-            </div>
-            <div class="media-overlay">
-              <div class="media-label">Beginner</div>
-              <div class="media-title">Morning Mobility (10 min)</div>
-              <div class="media-cta">Tap to play</div>
+          <div class="carousel-group" id="beginner-folder">
+            <div class="carousel-note">Swipe through the beginner folder to pick your daily session.</div>
+            <div class="carousel" role="list">
+              <div class="media-block color-1" id="beginner-1" data-id="beginner-1" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+                <div class="media-shell">
+                  <iframe src="https://www.youtube.com/embed/vKh3tzSU6w0" title="Beginner Mobility 1" allowfullscreen></iframe>
+                </div>
+                <div class="media-overlay">
+                  <div class="media-label">Beginner</div>
+                  <div class="media-title">Gentle Wake-Up</div>
+                  <div class="media-cta">Tap to play</div>
+                </div>
+              </div>
+
+              <div class="media-block color-2" id="beginner-2" data-id="beginner-2" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+                <div class="media-shell">
+                  <iframe src="https://www.youtube.com/embed/DcNrDvXLgc0" title="Beginner Mobility 2" allowfullscreen></iframe>
+                </div>
+                <div class="media-overlay">
+                  <div class="media-label">Beginner</div>
+                  <div class="media-title">Foundations & Breath</div>
+                  <div class="media-cta">Tap to play</div>
+                </div>
+              </div>
+
+              <div class="media-block color-3" id="beginner-3" data-id="beginner-3" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+                <div class="media-shell">
+                  <iframe src="https://www.youtube.com/embed/kU_EUW2ZdqA" title="Beginner Mobility 3" allowfullscreen></iframe>
+                </div>
+                <div class="media-overlay">
+                  <div class="media-label">Beginner</div>
+                  <div class="media-title">Daily Joint Care</div>
+                  <div class="media-cta">Tap to play</div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="media-block color-2" id="beginner-2" data-id="beginner-2" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-            <div class="media-shell">
-              <iframe src="https://www.youtube-nocookie.com/embed/QkCXw0bJ6sU?rel=0&modestbranding=1" title="Full Body Mobility Routine"></iframe>
-            </div>
-            <div class="media-overlay">
-              <div class="media-label">Beginner</div>
-              <div class="media-title">Full Body Mobility</div>
-              <div class="media-cta">Tap to play</div>
+          <div class="carousel-group" id="intermediate-folder">
+            <div class="carousel-note">Swipe across to choose an intermediate flow for today.</div>
+            <div class="carousel" role="list">
+              <div class="media-block color-4" id="intermediate-1" data-id="intermediate-1" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+                <div class="media-shell">
+                  <iframe src="https://www.youtube.com/embed/gXs3GRt3QpY" title="Intermediate Mobility 1" allowfullscreen></iframe>
+                </div>
+                <div class="media-overlay">
+                  <div class="media-label">Intermediate</div>
+                  <div class="media-title">Dynamic Hips & Spine</div>
+                  <div class="media-cta">Tap to play</div>
+                </div>
+              </div>
+
+              <div class="media-block color-5" id="intermediate-2" data-id="intermediate-2" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+                <div class="media-shell">
+                  <iframe src="https://www.youtube.com/embed/O4rWml36V2M" title="Intermediate Mobility 2" allowfullscreen></iframe>
+                </div>
+                <div class="media-overlay">
+                  <div class="media-label">Intermediate</div>
+                  <div class="media-title">Full-Body Elasticity</div>
+                  <div class="media-cta">Tap to play</div>
+                </div>
+              </div>
+
+              <div class="media-block color-6" id="intermediate-3" data-id="intermediate-3" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+                <div class="media-shell">
+                  <iframe src="https://www.youtube.com/embed/m08osvKFl_0" title="Intermediate Mobility 3" allowfullscreen></iframe>
+                </div>
+                <div class="media-overlay">
+                  <div class="media-label">Intermediate</div>
+                  <div class="media-title">Athletic Range Builder</div>
+                  <div class="media-cta">Tap to play</div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="media-block color-3" id="advanced-1" data-id="advanced-1" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-            <div class="media-shell">
-              <iframe src="https://www.youtube-nocookie.com/embed/y2RAq3g_Y9E?rel=0&modestbranding=1" title="Advanced Hip Flow"></iframe>
-            </div>
-            <div class="media-overlay">
-              <div class="media-label">Advanced</div>
-              <div class="media-title">Hip & Spine Flow</div>
-              <div class="media-cta">Tap to play</div>
+          <div class="carousel-group" id="advanced-folder">
+            <div class="carousel-note">Advanced folder: swipe to pick the challenge for the day.</div>
+            <div class="carousel" role="list">
+              <div class="media-block color-3" id="advanced-1" data-id="advanced-1" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+                <div class="media-shell">
+                  <iframe src="https://www.youtube.com/embed/up_tF1_jNuc" title="Advanced Mobility 1" allowfullscreen></iframe>
+                </div>
+                <div class="media-overlay">
+                  <div class="media-label">Advanced</div>
+                  <div class="media-title">Powerful Hip Flow</div>
+                  <div class="media-cta">Tap to play</div>
+                </div>
+              </div>
+
+              <div class="media-block color-1" id="advanced-2" data-id="advanced-2" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+                <div class="media-shell">
+                  <iframe src="https://www.youtube.com/embed/NidlwVlteps" title="Advanced Mobility 2" allowfullscreen></iframe>
+                </div>
+                <div class="media-overlay">
+                  <div class="media-label">Advanced</div>
+                  <div class="media-title">Strength & Control</div>
+                  <div class="media-cta">Tap to play</div>
+                </div>
+              </div>
+
+              <div class="media-block color-2" id="advanced-3" data-id="advanced-3" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+                <div class="media-shell">
+                  <iframe src="https://www.youtube.com/embed/GD5HNk-oDME" title="Advanced Mobility 3" allowfullscreen></iframe>
+                </div>
+                <div class="media-overlay">
+                  <div class="media-label">Advanced</div>
+                  <div class="media-title">Explosive Range</div>
+                  <div class="media-cta">Tap to play</div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="media-block color-5" id="advanced-2" data-id="advanced-2" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-            <div class="media-shell">
-              <iframe src="https://www.youtube-nocookie.com/embed/wu_pWv_KgmY?rel=0&modestbranding=1" title="Advanced Mobility Strength"></iframe>
-            </div>
-            <div class="media-overlay">
-              <div class="media-label">Advanced</div>
-              <div class="media-title">Mobility with Strength</div>
-              <div class="media-cta">Tap to play</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+          <div class="carousel-group" id="light-yoga-folder">
+            <div class="carousel-note">Light Yoga folder: swipe to select a gentle add-on.</div>
+            <div class="carousel" role="list">
+              <div class="media-block color-1" id="yoga-1" data-id="yoga-1" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+                <div class="media-shell">
+                  <iframe src="https://www.youtube.com/embed/sGbsS4bIAiY" title="Beginner Yoga Flow" allowfullscreen></iframe>
+                </div>
+                <div class="media-overlay">
+                  <div class="media-label">Light Yoga</div>
+                  <div class="media-title">10-Min Beginner Flow</div>
+                  <div class="media-cta">Tap to play</div>
+                </div>
+              </div>
 
-    <!-- YOGA -->
-    <section class="section" id="yoga">
-      <div class="section-inner">
-        <div class="section-header">
-          <div class="section-title">Yoga</div>
-          <div class="section-sub">Short guided flows to improve flexibility and reset your mind.</div>
-        </div>
-
-        <div class="tiles">
-          <div class="media-block color-1" id="yoga-1" data-id="yoga-1" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-            <div class="media-shell">
-              <iframe src="https://www.youtube-nocookie.com/embed/sGbsS4bIAiY?rel=0&modestbranding=1" title="Beginner Yoga Flow"></iframe>
-            </div>
-            <div class="media-overlay">
-              <div class="media-label">Yoga</div>
-              <div class="media-title">10-Min Beginner Flow</div>
-              <div class="media-cta">Tap to play</div>
-            </div>
-          </div>
-
-          <div class="media-block color-2" id="yoga-2" data-id="yoga-2" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-            <div class="media-shell">
-              <iframe src="https://www.youtube-nocookie.com/embed/7EoqvZovBDw?rel=0&modestbranding=1" title="Relaxing Stretch Flow"></iframe>
-            </div>
-            <div class="media-overlay">
-              <div class="media-label">Yoga</div>
-              <div class="media-title">Relaxing Stretch Flow</div>
-              <div class="media-cta">Tap to play</div>
+              <div class="media-block color-2" id="yoga-2" data-id="yoga-2" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+                <div class="media-shell">
+                  <iframe src="https://www.youtube.com/embed/7EoqvZovBDw" title="Relaxing Stretch Flow" allowfullscreen></iframe>
+                </div>
+                <div class="media-overlay">
+                  <div class="media-label">Light Yoga</div>
+                  <div class="media-title">Relaxing Stretch Flow</div>
+                  <div class="media-cta">Tap to play</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -631,7 +716,7 @@
           <div class="media-block color-4 audio" data-id="nsdr" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
             <div class="media-shell">
               <audio controls controlsList="nodownload noplaybackrate">
-                <source src="https://drive.google.com/uc?export=download&id=1HbnA2YFRiIzTc7ovgvH4G-mOZOKwdwKx" type="audio/mpeg">
+                <source src="https://drive.google.com/uc?export=download&id=1CksSrHrDyLrRzWR-pqJ9kAolVmQswpLL" type="audio/mpeg">
               </audio>
             </div>
             <div class="media-overlay">
@@ -643,18 +728,22 @@
 
           <div class="media-block color-2" id="med-1" data-id="med-1" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
             <div class="media-shell">
-              <iframe src="https://www.youtube-nocookie.com/embed/1ZYbU82GVz4?rel=0&modestbranding=1" title="Deep Relaxation"></iframe>
+              <audio controls controlsList="nodownload noplaybackrate">
+                <source src="https://drive.google.com/uc?export=download&id=1CksSrHrDyLrRzWR-pqJ9kAolVmQswpLL" type="audio/mpeg">
+              </audio>
             </div>
             <div class="media-overlay">
               <div class="media-label">Meditation</div>
-              <div class="media-title">Deep Relaxation</div>
+              <div class="media-title">Guided Meditation</div>
               <div class="media-cta">Tap to play</div>
             </div>
           </div>
 
           <div class="media-block color-3" id="med-2" data-id="med-2" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
             <div class="media-shell">
-              <iframe src="https://www.youtube-nocookie.com/embed/inpok4MKVLM?rel=0&modestbranding=1" title="Breathing Reset"></iframe>
+              <audio controls controlsList="nodownload noplaybackrate">
+                <source src="https://drive.google.com/uc?export=download&id=1CksSrHrDyLrRzWR-pqJ9kAolVmQswpLL" type="audio/mpeg">
+              </audio>
             </div>
             <div class="media-overlay">
               <div class="media-label">Meditation</div>
@@ -670,8 +759,8 @@
   <!-- BOTTOM NAV BAR -->
   <div class="bottom-nav">
     <div class="nav-item active" data-target="hero"><span>🏠</span>Home</div>
-    <div class="nav-item" data-target="beginner-1"><span>🧘</span>Mobility</div>
-    <div class="nav-item" data-target="yoga-1"><span>🌿</span>Yoga</div>
+    <div class="nav-item" data-target="mobility"><span>🧘</span>Mobility</div>
+    <div class="nav-item" data-target="light-yoga-folder"><span>🌿</span>Yoga</div>
     <div class="nav-item" data-target="nsdr"><span>💤</span>NSDR</div>
   </div>
 
