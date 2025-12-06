@@ -53,19 +53,6 @@
       z-index: -1;
     }
 
-    body.light-mode {
-      background: var(--bg-light);
-      color: var(--text-light);
-    }
-
-    body.light-mode::before {
-      background-image:
-        radial-gradient(circle at 10% 10%, rgba(0, 0, 0, 0.02) 0, transparent 55%),
-        radial-gradient(circle at 80% 100%, rgba(148, 163, 184, 0.08) 0, transparent 60%);
-      mix-blend-mode: normal;
-      opacity: 0.25;
-    }
-
     body.reduced-motion * {
       transition: none !important;
       animation: none !important;
@@ -104,47 +91,6 @@
       opacity: 0.85;
     }
 
-    .share-row {
-      margin: 0.8rem 1.25rem 0.5rem;
-      display: flex;
-      gap: 0.6rem;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .share-button {
-      background: var(--accent);
-      color: #0f172a;
-      border: none;
-      border-radius: 999px;
-      padding: 0.55rem 1.1rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 12px 24px rgba(125, 211, 252, 0.3);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .share-button:hover { transform: translateY(-1px); box-shadow: 0 14px 28px rgba(125, 211, 252, 0.35); }
-
-    .share-link {
-      font-size: 0.82rem;
-      opacity: 0.8;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 0.35rem 0.75rem;
-      border-radius: 12px;
-      word-break: break-all;
-    }
-
-    body.light-mode .share-link { background: rgba(0, 0, 0, 0.04); }
-
-    .share-feedback {
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--accent);
-      min-height: 1.1rem;
-    }
-
     .settings-button {
       position: absolute;
       top: 1.3rem;
@@ -162,38 +108,8 @@
       box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
     }
 
-    body.light-mode .settings-button {
-      background: rgba(255, 255, 255, 0.95);
-      border-color: #00000022;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
-    }
-
     .settings-button span {
       transform: translateY(-1px);
-    }
-
-    .toggle-wrap {
-      margin: 1rem auto 0;
-      display: inline-flex;
-      border-radius: 30px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    body.light-mode .toggle-wrap {
-      border-color: #00000022;
-    }
-
-    .toggle-option {
-      padding: 0.4rem 1.1rem;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-
-    .toggle-option.active {
-      background: var(--accent);
-      color: #000;
-      font-weight: 600;
     }
 
     .instruction {
@@ -220,12 +136,6 @@
       transform: translateY(-6px);
       pointer-events: none;
       transition: opacity 0.15s ease, transform 0.15s ease;
-    }
-
-    body.light-mode .settings-panel {
-      background: rgba(255, 255, 255, 0.98);
-      border-color: #00000022;
-      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.12);
     }
 
     .settings-panel.open {
@@ -272,11 +182,6 @@
       align-items: center;
       cursor: pointer;
       background: rgba(15, 23, 42, 0.9);
-    }
-
-    body.light-mode .settings-toggle {
-      background: rgba(248, 250, 252, 1);
-      border-color: #00000033;
     }
 
     .settings-toggle-knob {
@@ -367,12 +272,6 @@
       scroll-snap-align: start;
     }
 
-    body.light-mode .media-block {
-      background: var(--card-light);
-      border-color: #00000022;
-      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
-    }
-
     .media-block:hover {
       transform: translateY(-3px);
       box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
@@ -413,10 +312,6 @@
     .media-shell audio::-webkit-media-controls-enclosure {
       border-radius: 999px;
       background-color: rgba(15, 23, 42, 0.96);
-    }
-
-    body.light-mode .media-shell audio::-webkit-media-controls-enclosure {
-      background-color: #ffffff;
     }
 
     .media-overlay {
@@ -493,17 +388,6 @@
 
     .bottom-nav .nav-item.active { color: #fff; background: rgba(255, 255, 255, 0.06); }
 
-    body.light-mode .bottom-nav {
-      background: rgba(255, 255, 255, 0.95);
-      color: #0f172a;
-      border-top-color: #e2e8f0;
-    }
-
-    body.light-mode .bottom-nav .nav-item.active {
-      background: rgba(125, 211, 252, 0.25);
-      color: #0f172a;
-    }
-
     @media (min-width: 768px) {
       .tiles { gap: 1.4rem; }
       .carousel { grid-auto-columns: minmax(280px, 1fr); }
@@ -518,18 +402,7 @@
       <div class="hero-sub">Short guided routines to keep you moving and balanced daily.</div>
       <div class="streak-banner" id="streakBanner">Day streak: 0</div>
 
-      <div class="toggle-wrap" role="group" aria-label="Theme toggle">
-        <div class="toggle-option active" id="darkToggle">Dark</div>
-        <div class="toggle-option" id="lightToggle">Light</div>
-      </div>
-
       <p class="instruction">Tap a tile to reveal the video or audio. Mark sessions as watched and hide them anytime.</p>
-
-      <div class="share-row">
-        <button class="share-button" id="shareButton">Share app</button>
-        <div class="share-link" id="shareLink" aria-label="PWA share link"></div>
-      </div>
-      <div class="share-feedback" id="shareFeedback" role="status" aria-live="polite"></div>
     </header>
 
     <aside class="settings-panel" id="settingsPanel" aria-label="Settings panel">
@@ -713,41 +586,134 @@
         </div>
 
         <div class="tiles">
-          <div class="media-block color-4 audio" data-id="nsdr" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+          <!-- NSDR -->
+          <div class="media-block color-4 audio" data-id="nsdr-10min" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
             <div class="media-shell">
               <audio controls controlsList="nodownload noplaybackrate">
-                <source src="https://drive.google.com/uc?export=download&id=1CksSrHrDyLrRzWR-pqJ9kAolVmQswpLL" type="audio/mpeg">
+                <source src="https://drive.google.com/uc?export=download&id=NSDR_10MIN_FILE_ID_HERE" type="audio/mpeg">
               </audio>
             </div>
             <div class="media-overlay">
-              <div class="media-label">Meditation</div>
-              <div class="media-title">NSDR 10 mins</div>
+              <div class="media-label">NSDR</div>
+              <div class="media-title">NSDR 10 Min</div>
               <div class="media-cta">Tap to play</div>
             </div>
           </div>
 
-          <div class="media-block color-2" id="med-1" data-id="med-1" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+          <!-- Meditation Sessions -->
+          <div class="media-block color-1 audio" data-id="med-10min" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
             <div class="media-shell">
               <audio controls controlsList="nodownload noplaybackrate">
-                <source src="https://drive.google.com/uc?export=download&id=1CksSrHrDyLrRzWR-pqJ9kAolVmQswpLL" type="audio/mpeg">
+                <source src="https://drive.google.com/uc?export=download&id=MED_10MIN_FILE_ID_HERE" type="audio/mpeg">
               </audio>
             </div>
             <div class="media-overlay">
               <div class="media-label">Meditation</div>
-              <div class="media-title">Guided Meditation</div>
+              <div class="media-title">Meditation 10 Min</div>
               <div class="media-cta">Tap to play</div>
             </div>
           </div>
 
-          <div class="media-block color-3" id="med-2" data-id="med-2" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+          <div class="media-block color-2 audio" data-id="med-15min" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
             <div class="media-shell">
               <audio controls controlsList="nodownload noplaybackrate">
-                <source src="https://drive.google.com/uc?export=download&id=1CksSrHrDyLrRzWR-pqJ9kAolVmQswpLL" type="audio/mpeg">
+                <source src="https://drive.google.com/uc?export=download&id=MED_15MIN_FILE_ID_HERE" type="audio/mpeg">
               </audio>
             </div>
             <div class="media-overlay">
               <div class="media-label">Meditation</div>
-              <div class="media-title">Breathing Reset</div>
+              <div class="media-title">Meditation 15 Min</div>
+              <div class="media-cta">Tap to play</div>
+            </div>
+          </div>
+
+          <div class="media-block color-3 audio" data-id="med-20min" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+            <div class="media-shell">
+              <audio controls controlsList="nodownload noplaybackrate">
+                <source src="https://drive.google.com/uc?export=download&id=MED_20MIN_FILE_ID_HERE" type="audio/mpeg">
+              </audio>
+            </div>
+            <div class="media-overlay">
+              <div class="media-label">Meditation</div>
+              <div class="media-title">Meditation 20 Min</div>
+              <div class="media-cta">Tap to play</div>
+            </div>
+          </div>
+
+          <div class="media-block color-5 audio" data-id="med-30min" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+            <div class="media-shell">
+              <audio controls controlsList="nodownload noplaybackrate">
+                <source src="https://drive.google.com/uc?export=download&id=MED_30MIN_FILE_ID_HERE" type="audio/mpeg">
+              </audio>
+            </div>
+            <div class="media-overlay">
+              <div class="media-label">Meditation</div>
+              <div class="media-title">Meditation 30 Min</div>
+              <div class="media-cta">Tap to play</div>
+            </div>
+          </div>
+
+          <div class="media-block color-6 audio" data-id="med-45min" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+            <div class="media-shell">
+              <audio controls controlsList="nodownload noplaybackrate">
+                <source src="https://drive.google.com/uc?export=download&id=MED_45MIN_FILE_ID_HERE" type="audio/mpeg">
+              </audio>
+            </div>
+            <div class="media-overlay">
+              <div class="media-label">Meditation</div>
+              <div class="media-title">Meditation 45 Min</div>
+              <div class="media-cta">Tap to play</div>
+            </div>
+          </div>
+
+          <div class="media-block color-1 audio" data-id="med-60min" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+            <div class="media-shell">
+              <audio controls controlsList="nodownload noplaybackrate">
+                <source src="https://drive.google.com/uc?export=download&id=MED_60MIN_FILE_ID_HERE" type="audio/mpeg">
+              </audio>
+            </div>
+            <div class="media-overlay">
+              <div class="media-label">Meditation</div>
+              <div class="media-title">Meditation 60 Min</div>
+              <div class="media-cta">Tap to play</div>
+            </div>
+          </div>
+
+          <div class="media-block color-2 audio" data-id="med-endofday" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+            <div class="media-shell">
+              <audio controls controlsList="nodownload noplaybackrate">
+                <source src="https://drive.google.com/uc?export=download&id=MED_ENDOFDAY_FILE_ID_HERE" type="audio/mpeg">
+              </audio>
+            </div>
+            <div class="media-overlay">
+              <div class="media-label">Meditation</div>
+              <div class="media-title">End of Day 10 Min</div>
+              <div class="media-cta">Tap to play</div>
+            </div>
+          </div>
+
+          <div class="media-block color-4 audio" data-id="med-stressed" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+            <div class="media-shell">
+              <audio controls controlsList="nodownload noplaybackrate">
+                <source src="https://drive.google.com/uc?export=download&id=MED_STRESSED_FILE_ID_HERE" type="audio/mpeg">
+              </audio>
+            </div>
+            <div class="media-overlay">
+              <div class="media-label">Meditation</div>
+              <div class="media-title">Stressed 3 Min</div>
+              <div class="media-cta">Tap to play</div>
+            </div>
+          </div>
+
+          <div class="media-block color-5 audio" data-id="med-walking" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
+            <div class="media-shell">
+              <audio controls controlsList="nodownload noplaybackrate">
+                <source src="https://drive.google.com/uc?export=download&id=MED_WALKING_FILE_ID_HERE" type="audio/mpeg">
+              </audio>
+            </div>
+            <div class="media-overlay">
+              <div class="media-label">Meditation</div>
+              <div class="media-title">Walking 10 Min</div>
               <div class="media-cta">Tap to play</div>
             </div>
           </div>
@@ -789,56 +755,6 @@
       }
     })();
 
-    /* ------------------------------
-       SHARE LINK HANDLER
-    ------------------------------ */
-    const shareLink = document.getElementById("shareLink");
-    const shareFeedback = document.getElementById("shareFeedback");
-    const sharedUrl = window.location.origin === "file://"
-      ? window.location.href
-      : `${window.location.origin}${window.location.pathname}`.replace(/\/$/, "/");
-
-    shareLink.textContent = sharedUrl;
-
-    function showShareFeedback(message) {
-      shareFeedback.textContent = message;
-      setTimeout(() => { shareFeedback.textContent = ""; }, 3200);
-    }
-
-    async function copyShareUrl() {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(sharedUrl);
-        return true;
-      }
-
-      const tempInput = document.createElement("textarea");
-      tempInput.value = sharedUrl;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      const copied = document.execCommand("copy");
-      document.body.removeChild(tempInput);
-      return copied;
-    }
-
-    document.getElementById("shareButton").onclick = async () => {
-      if (navigator.share) {
-        try {
-          await navigator.share({
-            title: "Mobility & Mindfulness",
-            text: "Guided mobility, yoga, and meditation on the go.",
-            url: sharedUrl
-          });
-          showShareFeedback("Shared from your device");
-          return;
-        } catch (err) {
-          // fall back to copy below
-        }
-      }
-
-      const copied = await copyShareUrl();
-      showShareFeedback(copied ? "Link copied to clipboard" : "Copy the link above to share");
-    };
-
     function saveSettings() {
       localStorage.setItem("appSettings", JSON.stringify({
         autoplay: settings.autoplay,
@@ -847,18 +763,6 @@
         watched: [...settings.watched]
       }));
     }
-
-    /* ------------------------------
-       THEME TOGGLE
-    ------------------------------ */
-    (function hydrateTheme() {
-      const storedTheme = localStorage.getItem("theme");
-      if (storedTheme === "light") {
-        document.body.classList.add("light-mode");
-        document.getElementById("lightToggle").classList.add("active");
-        document.getElementById("darkToggle").classList.remove("active");
-      }
-    })();
 
     /* ------------------------------
        REVEAL MEDIA (TILES)
@@ -924,26 +828,6 @@
     document.getElementById("autoplayToggle").classList.toggle("active", settings.autoplay);
     document.getElementById("hideWatchedToggle").classList.toggle("active", settings.hideWatched);
     document.getElementById("reducedMotionToggle").classList.toggle("active", settings.reducedMotion);
-
-    /* ------------------------------
-       DARK / LIGHT MODE TOGGLE
-    ------------------------------ */
-    const darkToggle = document.getElementById("darkToggle");
-    const lightToggle = document.getElementById("lightToggle");
-
-    darkToggle.onclick = () => {
-      document.body.classList.remove("light-mode");
-      darkToggle.classList.add("active");
-      lightToggle.classList.remove("active");
-      localStorage.setItem("theme", "dark");
-    };
-
-    lightToggle.onclick = () => {
-      document.body.classList.add("light-mode");
-      lightToggle.classList.add("active");
-      darkToggle.classList.remove("active");
-      localStorage.setItem("theme", "light");
-    };
 
     /* ------------------------------
        SETTINGS PANEL OPEN/CLOSE
