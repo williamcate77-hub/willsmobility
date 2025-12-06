@@ -119,6 +119,67 @@
       opacity: 0.65;
     }
 
+    /* Timer Module */
+    .timer-module {
+      margin: 1.5rem 1.25rem 1.2rem;
+      text-align: center;
+    }
+
+    .timer-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 1rem;
+    }
+
+    .timer-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .timer-btn {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      border: 2px solid rgba(125, 211, 252, 0.5);
+      background: rgba(125, 211, 252, 0.1);
+      color: var(--text-dark);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(125, 211, 252, 0.2);
+    }
+
+    .timer-btn:hover {
+      transform: scale(1.05);
+      background: rgba(125, 211, 252, 0.2);
+      box-shadow: 0 6px 16px rgba(125, 211, 252, 0.3);
+    }
+
+    .timer-btn.active {
+      border-color: var(--accent);
+      background: rgba(125, 211, 252, 0.25);
+      animation: timer-pulse 2s ease-in-out infinite;
+      box-shadow: 0 0 20px rgba(125, 211, 252, 0.6);
+    }
+
+    @keyframes timer-pulse {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(125, 211, 252, 0.6);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(125, 211, 252, 0.8);
+      }
+    }
+
     /* Settings panel */
     .settings-panel {
       position: fixed;
@@ -403,6 +464,22 @@
       <div class="streak-banner" id="streakBanner">Day streak: 0</div>
 
       <p class="instruction">Tap a tile to reveal the video or audio. Mark sessions as watched and hide them anytime.</p>
+
+      <!-- Timer Module -->
+      <div class="timer-module">
+        <div class="timer-title">Insight and Exercise Timer</div>
+        <div class="timer-buttons">
+          <button class="timer-btn" data-duration="10" aria-label="10 minute timer">
+            10<br>Minutes
+          </button>
+          <button class="timer-btn" data-duration="20" aria-label="20 minute timer">
+            20<br>Minutes
+          </button>
+          <button class="timer-btn" data-duration="30" aria-label="30 minute timer">
+            30<br>Minutes
+          </button>
+        </div>
+      </div>
     </header>
 
     <aside class="settings-panel" id="settingsPanel" aria-label="Settings panel">
@@ -861,6 +938,92 @@
        APPLY hideWatched ON LOAD
     ------------------------------ */
     applyHideWatched();
+
+    /* ------------------------------
+       INSIGHT AND EXERCISE TIMER
+    ------------------------------ */
+    let activeTimer = null;
+    let timerInterval = null;
+    let timerStartTime = null;
+
+    // Audio for chimes (using simple beep - users can replace with actual audio files)
+    const lightChime = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBjaS2fPMeS0GJ3nJ8d2RQQoVYbjq7KpXFgpIot/yuHIpBjmS2PPMeSwGKHnJ8d2RQQoVYbjq7KpXFgpIot/yuHIpBjmS2PPMeSwGKHnJ8d2RQQoVYbjq7KpXFgpIot/yuHIpBjmS2PPMeSwGKHnJ8d2RQQoVYbjq7KpXFgpIot/yuHIpBjmS2PPMeSwGKHnJ8d2RQQoVYbjq7KpXFgpIot/yuHIpBjmS2PPMeSwGKHnJ8d2RQQoVYbjq7KpXFgpIot/yuHIpBjmS2PPMeSwGKHnJ8d2RQQoVYbjq7KpXFgpIot/yuHIpBjmS2PPMeSwGKHnJ8d2RQQoVYbjq7KpXFgpIot/yuHIpBjmS2PPMeSwGKHnJ8d2RQQoVYbjq7KpXFg==');
+    const distinctChime = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBjaS2fPMeS0GJ3nJ8d2RQQoVYbjq7KpXFgpIot/yuHIpBjmS2PPMeSwGKHnJ8d2RQQoVYbjq7KpXFgpIot/yuHIpBjmS2PPMeSwGKHnJ8d2RQQoVYbjq7KpXFgpIot/yuHIpBjmS2PPMeSwGKHnJ8d2RQQoVYbjq7KpXFgpIot/yuHIpBjmS2PPMeSwGKHnJ8d2RQQoVYbjq7KpXFgpIot/yuHIpBjmS2PPMeSwGKHnJ8d2RQQoVYbjq7KpXFgpIot/yuHIpBjmS2PPMeSwGKHnJ8d2RQQoVYbjq7KpXFgpIot/yuHIpBjmS2PPMeSwGKHnJ8d2RQQoVYbjq7KpXFgpIot/yuHIpBjmS2PPMeSwGKHnJ8d2RQQoVYbjq7KpXFg==');
+
+    function playChime(isDistinct = false) {
+      const chime = isDistinct ? distinctChime : lightChime;
+      chime.currentTime = 0;
+      chime.volume = 0.5;
+      chime.play().catch(err => console.log('Chime play failed:', err));
+    }
+
+    function stopTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+      if (activeTimer) {
+        activeTimer.classList.remove('active');
+        activeTimer = null;
+      }
+      timerStartTime = null;
+    }
+
+    function startTimer(button, duration) {
+      // If clicking the active timer, stop it
+      if (activeTimer === button) {
+        stopTimer();
+        return;
+      }
+
+      // Stop any existing timer
+      stopTimer();
+
+      // Start new timer
+      activeTimer = button;
+      activeTimer.classList.add('active');
+      timerStartTime = Date.now();
+
+      const endTime = timerStartTime + (duration * 60 * 1000);
+      const distinctMarks = new Set();
+
+      // Set distinct chime marks based on duration
+      if (duration >= 10) distinctMarks.add(10);
+      if (duration >= 20) distinctMarks.add(20);
+      if (duration >= 30) distinctMarks.add(30);
+
+      // Check timer every second
+      timerInterval = setInterval(() => {
+        const elapsed = Math.floor((Date.now() - timerStartTime) / 1000 / 60); // minutes elapsed
+        const remaining = Math.floor((endTime - Date.now()) / 1000 / 60);
+
+        // Check if we've hit a 2-minute interval
+        const totalSeconds = Math.floor((Date.now() - timerStartTime) / 1000);
+        if (totalSeconds > 0 && totalSeconds % 120 === 0) {
+          // Check if this is also a distinct mark
+          const currentMinute = Math.floor(totalSeconds / 60);
+          if (distinctMarks.has(currentMinute)) {
+            playChime(true); // Distinct chime
+          } else {
+            playChime(false); // Light chime
+          }
+        }
+
+        // Timer complete
+        if (Date.now() >= endTime) {
+          playChime(true); // Final distinct chime
+          stopTimer();
+        }
+      }, 1000);
+    }
+
+    // Attach event listeners to timer buttons
+    document.querySelectorAll('.timer-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const duration = parseInt(btn.dataset.duration);
+        startTimer(btn, duration);
+      });
+    });
 
     /* ------------------------------
        SERVICE WORKER (PWA)
