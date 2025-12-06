@@ -15,7 +15,6 @@ const AUDIO_FILES = [
   'https://drive.google.com/uc?export=download&id=1Umgjax0s5xAJSAD1vWmC-aaH9FQbQPND', // Med 15min
   'https://drive.google.com/uc?export=download&id=1k7Vd-2U6sxCIwAH1xGILVYbwzdk87V7q', // Med 20min
   'https://drive.google.com/uc?export=download&id=11VUSC-lgdnK9YDNNrfgU4klr_jAJRgeV', // Med 30min
-  'https://drive.google.com/uc?export=download&id=1iq_qS4jvFGP14Ha7GKEZDmSMb7yW_DJ4', // Med 45min & 60min
   'https://drive.google.com/uc?export=download&id=1ZkPzUaHc0iiKUvFCCZRf1kgPN2nby0yQ', // End of Day
   'https://drive.google.com/uc?export=download&id=1PSUDBJGpg5ED6zY1tVrIg0nIChnI3_I3', // Stressed 3min
   'https://drive.google.com/uc?export=download&id=10Pt0_vvtCHQNFfh6hpWj-w3LjeHqStQS'  // Walking 10min
