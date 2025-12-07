@@ -1,23 +1,23 @@
-const CACHE_NAME = 'mobility-mindfulness-v3';
-const AUDIO_CACHE = 'audio-cache-v3';
+const CACHE_NAME = 'mobility-mindfulness-v4';
+const AUDIO_CACHE = 'audio-cache-v4';
 const OFFLINE_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png'
+  './',
+  './index.html',
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png'
 ];
 
 // Local audio files
 const AUDIO_FILES = [
-  '/audio/nsdr-10min.mp3',
-  '/audio/med-10min.mp3',
-  '/audio/med-15min.mp3',
-  '/audio/med-20min.mp3',
-  '/audio/med-30min.mp3',
-  '/audio/med-endofday.mp3',
-  '/audio/med-stressed.mp3',
-  '/audio/med-walking.mp3'
+  './audio/nsdr-10min.mp3',
+  './audio/med-10min.mp3',
+  './audio/med-15min.mp3',
+  './audio/med-20min.mp3',
+  './audio/med-30min.mp3',
+  './audio/med-endofday.mp3',
+  './audio/med-stressed.mp3',
+  './audio/med-walking.mp3'
 ];
 
 self.addEventListener('install', (event) => {
@@ -75,7 +75,7 @@ self.addEventListener('fetch', (event) => {
         const clone = response.clone();
         caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
         return response;
-      }).catch(() => caches.match('/index.html'));
+      }).catch(() => caches.match('./index.html'));
     })
   );
 });
