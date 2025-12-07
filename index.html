@@ -91,27 +91,6 @@
       opacity: 0.85;
     }
 
-    .settings-button {
-      position: absolute;
-      top: 1.3rem;
-      right: 1.25rem;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      cursor: pointer;
-      background: rgba(15, 23, 42, 0.9);
-      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
-    }
-
-    .settings-button span {
-      transform: translateY(-1px);
-    }
-
     .instruction {
       margin: 0.9rem 1.25rem 1.6rem;
       text-align: center;
@@ -178,90 +157,6 @@
       50% {
         box-shadow: 0 0 30px rgba(125, 211, 252, 0.8);
       }
-    }
-
-    /* Settings panel */
-    .settings-panel {
-      position: fixed;
-      top: 3.6rem;
-      right: 1.25rem;
-      width: 260px;
-      max-width: calc(100% - 2.5rem);
-      background: rgba(15, 23, 42, 0.98);
-      border-radius: 16px;
-      padding: 0.85rem 1rem 0.9rem;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.65);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      z-index: 40;
-      opacity: 0;
-      transform: translateY(-6px);
-      pointer-events: none;
-      transition: opacity 0.15s ease, transform 0.15s ease;
-    }
-
-    .settings-panel.open {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .settings-panel-title {
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      opacity: 0.8;
-      margin-bottom: 0.4rem;
-    }
-
-    .settings-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      padding: 0.32rem 0;
-    }
-
-    .settings-row span {
-      max-width: 70%;
-    }
-
-    .settings-row small {
-      display: block;
-      font-size: 0.7rem;
-      opacity: 0.65;
-      margin-top: 0.1rem;
-    }
-
-    .settings-toggle {
-      width: 42px;
-      height: 24px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.9);
-      padding: 2px;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    .settings-toggle-knob {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: #e5e7eb;
-      transform: translateX(0);
-      transition: transform 0.15s ease;
-    }
-
-    .settings-toggle.active {
-      background: var(--accent);
-      border-color: transparent;
-    }
-
-    .settings-toggle.active .settings-toggle-knob {
-      transform: translateX(16px);
-      background: #0f172a;
     }
 
     /* Section styling */
@@ -458,7 +353,6 @@
 <body>
   <div class="page-wrap">
     <header class="hero" id="hero">
-      <button class="settings-button" id="settingsButton" aria-label="Open settings"><span>⚙️</span></button>
       <div class="hero-title">Mobility & Mindfulness</div>
       <div class="hero-sub">Short guided routines to keep you moving and balanced daily.</div>
       <div class="streak-banner" id="streakBanner">Day streak: 0</div>
@@ -479,25 +373,6 @@
         </div>
       </div>
     </header>
-
-    <aside class="settings-panel" id="settingsPanel" aria-label="Settings panel">
-      <div class="settings-panel-title">Settings</div>
-
-      <div class="settings-row">
-        <span>Autoplay audio</span>
-        <div class="settings-toggle" id="autoplayToggle"><div class="settings-toggle-knob"></div></div>
-      </div>
-
-      <div class="settings-row">
-        <span>Hide watched tiles</span>
-        <div class="settings-toggle" id="hideWatchedToggle"><div class="settings-toggle-knob"></div></div>
-      </div>
-
-      <div class="settings-row">
-        <span>Reduced motion<small>Removes animations for sensitive users</small></span>
-        <div class="settings-toggle" id="reducedMotionToggle"><div class="settings-toggle-knob"></div></div>
-      </div>
-    </aside>
 
     <!-- MOBILITY -->
     <section class="section" id="mobility">
@@ -664,8 +539,8 @@
           <!-- NSDR -->
           <div class="media-block color-4 audio" data-id="nsdr-10min" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
             <div class="media-shell">
-              <audio controls controlsList="nodownload noplaybackrate">
-                <source src="https://drive.google.com/uc?export=download&id=1HbnA2YFRiIzTc7ovgvH4G-mOZOKwdwKx" type="audio/mpeg">
+              <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                <source src="audio/nsdr-10min.mp3" type="audio/mpeg">
               </audio>
             </div>
             <div class="media-overlay">
@@ -678,8 +553,8 @@
           <!-- Meditation Sessions -->
           <div class="media-block color-1 audio" data-id="med-10min" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
             <div class="media-shell">
-              <audio controls controlsList="nodownload noplaybackrate">
-                <source src="https://drive.google.com/uc?export=download&id=1GnkxM6Frced8p6MgxS16Tdl0ivV24GfI" type="audio/mpeg">
+              <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                <source src="audio/med-10min.mp3" type="audio/mpeg">
               </audio>
             </div>
             <div class="media-overlay">
@@ -691,8 +566,8 @@
 
           <div class="media-block color-2 audio" data-id="med-15min" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
             <div class="media-shell">
-              <audio controls controlsList="nodownload noplaybackrate">
-                <source src="https://drive.google.com/uc?export=download&id=1Umgjax0s5xAJSAD1vWmC-aaH9FQbQPND" type="audio/mpeg">
+              <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                <source src="audio/med-15min.mp3" type="audio/mpeg">
               </audio>
             </div>
             <div class="media-overlay">
@@ -704,8 +579,8 @@
 
           <div class="media-block color-3 audio" data-id="med-20min" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
             <div class="media-shell">
-              <audio controls controlsList="nodownload noplaybackrate">
-                <source src="https://drive.google.com/uc?export=download&id=1k7Vd-2U6sxCIwAH1xGILVYbwzdk87V7q" type="audio/mpeg">
+              <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                <source src="audio/med-20min.mp3" type="audio/mpeg">
               </audio>
             </div>
             <div class="media-overlay">
@@ -717,8 +592,8 @@
 
           <div class="media-block color-5 audio" data-id="med-30min" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
             <div class="media-shell">
-              <audio controls controlsList="nodownload noplaybackrate">
-                <source src="https://drive.google.com/uc?export=download&id=11VUSC-lgdnK9YDNNrfgU4klr_jAJRgeV" type="audio/mpeg">
+              <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                <source src="audio/med-30min.mp3" type="audio/mpeg">
               </audio>
             </div>
             <div class="media-overlay">
@@ -730,8 +605,8 @@
 
           <div class="media-block color-2 audio" data-id="med-endofday" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
             <div class="media-shell">
-              <audio controls controlsList="nodownload noplaybackrate">
-                <source src="https://drive.google.com/uc?export=download&id=1ZkPzUaHc0iiKUvFCCZRf1kgPN2nby0yQ" type="audio/mpeg">
+              <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                <source src="audio/med-endofday.mp3" type="audio/mpeg">
               </audio>
             </div>
             <div class="media-overlay">
@@ -743,8 +618,8 @@
 
           <div class="media-block color-4 audio" data-id="med-stressed" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
             <div class="media-shell">
-              <audio controls controlsList="nodownload noplaybackrate">
-                <source src="https://drive.google.com/uc?export=download&id=1PSUDBJGpg5ED6zY1tVrIg0nIChnI3_I3" type="audio/mpeg">
+              <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                <source src="audio/med-stressed.mp3" type="audio/mpeg">
               </audio>
             </div>
             <div class="media-overlay">
@@ -756,8 +631,8 @@
 
           <div class="media-block color-5 audio" data-id="med-walking" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
             <div class="media-shell">
-              <audio controls controlsList="nodownload noplaybackrate">
-                <source src="https://drive.google.com/uc?export=download&id=10Pt0_vvtCHQNFfh6hpWj-w3LjeHqStQS" type="audio/mpeg">
+              <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                <source src="audio/med-walking.mp3" type="audio/mpeg">
               </audio>
             </div>
             <div class="media-overlay">
@@ -781,55 +656,10 @@
 
   <script>
     /* ------------------------------
-       SETTINGS DATA STORAGE
-    ------------------------------ */
-    const settings = {
-      autoplay: false,
-      hideWatched: false,
-      reducedMotion: false,
-      watched: new Set()
-    };
-
-    // Load saved settings
-    (function loadSettings() {
-      try {
-        const saved = JSON.parse(localStorage.getItem("appSettings") || "{}");
-        Object.assign(settings, saved, { watched: new Set(saved.watched || []) });
-
-        if (settings.reducedMotion) {
-          document.body.classList.add("reduced-motion");
-        }
-      } catch (e) {
-        console.warn("Unable to load settings", e);
-      }
-    })();
-
-    function saveSettings() {
-      localStorage.setItem("appSettings", JSON.stringify({
-        autoplay: settings.autoplay,
-        hideWatched: settings.hideWatched,
-        reducedMotion: settings.reducedMotion,
-        watched: [...settings.watched]
-      }));
-    }
-
-    /* ------------------------------
        REVEAL MEDIA (TILES)
     ------------------------------ */
     function revealMedia(tile) {
       tile.classList.add("revealed");
-      const id = tile.dataset.id;
-      settings.watched.add(id);
-      saveSettings();
-
-      if (settings.autoplay) {
-        const audio = tile.querySelector("audio");
-        if (audio) audio.play().catch(() => {});
-      }
-
-      if (settings.hideWatched) {
-        setTimeout(() => tile.classList.add("hidden"), 600);
-      }
     }
 
     function handleKey(evt, tile) {
@@ -838,61 +668,6 @@
         revealMedia(tile);
       }
     }
-
-    function applyHideWatched() {
-      document.querySelectorAll(".media-block").forEach(tile => {
-        const id = tile.dataset.id;
-        if (settings.hideWatched && settings.watched.has(id)) {
-          tile.classList.add("hidden");
-        } else {
-          tile.classList.remove("hidden");
-        }
-      });
-    }
-
-    /* ------------------------------
-       SETTINGS PANEL INTERACTIONS
-    ------------------------------ */
-    document.getElementById("autoplayToggle").onclick = () => {
-      settings.autoplay = !settings.autoplay;
-      document.getElementById("autoplayToggle").classList.toggle("active", settings.autoplay);
-      saveSettings();
-    };
-
-    document.getElementById("hideWatchedToggle").onclick = () => {
-      settings.hideWatched = !settings.hideWatched;
-      document.getElementById("hideWatchedToggle").classList.toggle("active", settings.hideWatched);
-      applyHideWatched();
-      saveSettings();
-    };
-
-    document.getElementById("reducedMotionToggle").onclick = () => {
-      settings.reducedMotion = !settings.reducedMotion;
-      document.body.classList.toggle("reduced-motion", settings.reducedMotion);
-      document.getElementById("reducedMotionToggle").classList.toggle("active", settings.reducedMotion);
-      saveSettings();
-    };
-
-    // Apply saved settings to toggles
-    document.getElementById("autoplayToggle").classList.toggle("active", settings.autoplay);
-    document.getElementById("hideWatchedToggle").classList.toggle("active", settings.hideWatched);
-    document.getElementById("reducedMotionToggle").classList.toggle("active", settings.reducedMotion);
-
-    /* ------------------------------
-       SETTINGS PANEL OPEN/CLOSE
-    ------------------------------ */
-    const settingsButton = document.getElementById("settingsButton");
-    const settingsPanel = document.getElementById("settingsPanel");
-
-    settingsButton.onclick = () => {
-      settingsPanel.classList.toggle("open");
-    };
-
-    document.addEventListener("click", (evt) => {
-      if (!settingsPanel.contains(evt.target) && evt.target !== settingsButton) {
-        settingsPanel.classList.remove("open");
-      }
-    });
 
     /* ------------------------------
        PARALLAX HERO
@@ -931,11 +706,6 @@
         if (el) window.scrollTo({ top: el.offsetTop - 20, behavior: "smooth" });
       };
     });
-
-    /* ------------------------------
-       APPLY hideWatched ON LOAD
-    ------------------------------ */
-    applyHideWatched();
 
     /* ------------------------------
        INSIGHT AND EXERCISE TIMER
@@ -981,6 +751,9 @@
       activeTimer = button;
       activeTimer.classList.add('active');
       timerStartTime = Date.now();
+
+      // Play chime at the beginning
+      playChime(true);
 
       const endTime = timerStartTime + (duration * 60 * 1000);
       const distinctMarks = new Set();
