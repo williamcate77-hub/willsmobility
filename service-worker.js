@@ -1,5 +1,5 @@
-const CACHE_NAME = 'mobility-mindfulness-v5';
-const AUDIO_CACHE = 'audio-cache-v5';
+const CACHE_NAME = 'mobility-mindfulness-v6';
+const AUDIO_CACHE = 'audio-cache-v6';
 const OFFLINE_ASSETS = [
   '/willsmobility/',
   '/willsmobility/index.html',
@@ -22,11 +22,8 @@ const AUDIO_FILES = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    Promise.all([
-      caches.open(CACHE_NAME).then((cache) => cache.addAll(OFFLINE_ASSETS)),
-      // Pre-cache audio files for instant playback
-      caches.open(AUDIO_CACHE).then((cache) => cache.addAll(AUDIO_FILES))
-    ])
+    // Only cache essential assets during install, not audio files
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(OFFLINE_ASSETS))
   );
   self.skipWaiting();
 });
