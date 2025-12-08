@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <base href="/willsmobility/" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mobility & Mindfulness</title>
@@ -800,8 +801,9 @@
        SERVICE WORKER (PWA)
     ------------------------------ */
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("service-worker.js")
-        .catch(err => console.log("Service worker failed:", err));
+      navigator.serviceWorker.register("/willsmobility/service-worker.js", {
+        scope: "/willsmobility/"
+      }).catch(err => console.log("Service worker failed:", err));
     }
   </script>
 </body>
