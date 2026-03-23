@@ -321,7 +321,7 @@
       right: 0;
       height: var(--bottom-nav-height);
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       background: rgba(15, 23, 42, 0.92);
       border-top: 1px solid rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(10px);
@@ -347,6 +347,237 @@
     @media (min-width: 768px) {
       .tiles { gap: 1.4rem; }
       .carousel { grid-auto-columns: minmax(280px, 1fr); }
+    }
+
+    /* ==============================
+       MORNING ROUTINE — Poker UI
+       ============================== */
+    .hidden { display: none !important; }
+
+    /* Start screen */
+    .routine-start-screen { padding: 1.5rem 1.25rem 1rem; text-align: center; }
+    .routine-hero-emoji { font-size: 3.5rem; margin-bottom: 0.5rem; }
+    .routine-hero-title {
+      font-size: 1.7rem; font-weight: 700;
+      background: linear-gradient(135deg, #7dd3fc, #a5b4fc, #c084fc);
+      -webkit-background-clip: text; color: transparent;
+      margin-bottom: 0.3rem;
+    }
+    .routine-hero-sub { font-size: 0.85rem; opacity: 0.65; margin-bottom: 1.2rem; }
+
+    /* Week picker */
+    .week-picker {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.2rem; background: var(--card-dark);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 16px;
+      padding: 1rem; margin: 0 0 1.2rem;
+    }
+    .week-pick-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08); color: #fff;
+      font-size: 1.3rem; cursor: pointer; font-family: inherit;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .week-pick-btn:hover { background: rgba(255,255,255,0.15); }
+    .week-pick-value { text-align: center; }
+    .week-pick-number { font-size: 2rem; font-weight: 700; }
+    .week-pick-label { font-size: 0.65rem; opacity: 0.55; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* Phase chip */
+    .phase-chip {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(125,211,252,0.12);
+      border: 1px solid rgba(125,211,252,0.3);
+      border-radius: 999px; padding: 0.3rem 0.85rem;
+      font-size: 0.75rem; font-weight: 600; margin-bottom: 1.2rem;
+    }
+
+    /* Exercise preview list */
+    .exercise-list-preview { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; text-align: left; }
+    .exercise-preview-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      background: var(--card-dark); border-radius: 12px;
+      padding: 0.65rem 1rem; border: 1px solid rgba(255,255,255,0.06);
+    }
+    .ep-emoji { font-size: 1.3rem; flex-shrink: 0; }
+    .ep-info { flex: 1; }
+    .ep-name { font-size: 0.88rem; font-weight: 600; }
+    .ep-duration-badge {
+      background: rgba(255,255,255,0.08); border-radius: 999px;
+      padding: 0.15rem 0.55rem; font-size: 0.68rem; font-weight: 600;
+    }
+
+    /* Begin button */
+    .routine-begin-btn {
+      width: 100%; padding: 1rem; border-radius: 28px;
+      background: rgba(125,211,252,0.2); border: 1px solid rgba(125,211,252,0.45);
+      color: #fff; font-size: 1.05rem; font-weight: 700;
+      cursor: pointer; font-family: inherit; letter-spacing: 0.04em;
+      transition: all 0.25s ease; margin-bottom: 0.5rem;
+    }
+    .routine-begin-btn:hover { background: rgba(125,211,252,0.3); }
+
+    /* Active screen */
+    .routine-active-screen { display: flex; flex-direction: column; }
+
+    /* Roster row */
+    .routine-roster {
+      display: flex; gap: 0.6rem; overflow-x: auto;
+      padding: 1rem 1.25rem 0.6rem;
+      scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    }
+    .routine-roster::-webkit-scrollbar { display: none; }
+    .roster-item { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; flex-shrink: 0; width: 52px; }
+    .roster-avatar {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      border: 2px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; position: relative; transition: all 0.3s;
+    }
+    .roster-item.current .roster-avatar {
+      border-color: var(--accent);
+      box-shadow: 0 0 16px rgba(125,211,252,0.55);
+      background: rgba(125,211,252,0.12);
+    }
+    .roster-item.done .roster-avatar { opacity: 0.3; }
+    .roster-indicator {
+      position: absolute; bottom: -5px; right: -3px;
+      width: 14px; height: 14px; background: var(--accent);
+      border-radius: 50%; font-size: 0.5rem; color: #000; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .roster-dur { font-size: 0.6rem; font-weight: 600; opacity: 0.7; }
+    .roster-label { font-size: 0.5rem; opacity: 0.5; text-align: center; line-height: 1.2; }
+
+    /* Board / exercise card */
+    .routine-board { padding: 0 1.25rem; margin: 0.3rem 0 0.5rem; }
+    .exercise-card {
+      background: var(--card-dark);
+      border-radius: 24px; border: 1px solid rgba(255,255,255,0.09);
+      padding: 1.25rem 1.25rem 1.1rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    }
+    .exercise-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+    .exercise-emoji-big { font-size: 2.2rem; line-height: 1; }
+    .exercise-name-text { font-size: 1.1rem; font-weight: 700; }
+    .exercise-body-part { font-size: 0.7rem; opacity: 0.55; margin-top: 0.1rem; }
+
+    /* Circular timer ring */
+    .timer-ring-wrap {
+      position: relative; width: 110px; height: 110px; margin: 0 auto 1rem;
+    }
+    .timer-ring { width: 110px; height: 110px; transform: rotate(-90deg); }
+    .timer-ring-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 8; }
+    .timer-ring-progress {
+      fill: none; stroke: var(--accent); stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 283; stroke-dashoffset: 0;
+      transition: stroke-dashoffset 0.9s linear, stroke 0.5s;
+    }
+    .timer-ring-progress.warn { stroke: #fbbf24; }
+    .timer-ring-progress.urgent { stroke: #f87171; }
+    .timer-center {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .timer-time-text { font-size: 1.5rem; font-weight: 700; line-height: 1; }
+    .timer-sub-text { font-size: 0.55rem; opacity: 0.5; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* Step list */
+    .step-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .step-item { display: flex; gap: 0.6rem; font-size: 0.8rem; line-height: 1.45; opacity: 0.82; }
+    .step-dot {
+      flex-shrink: 0; width: 6px; height: 6px;
+      background: var(--accent); border-radius: 50%; margin-top: 0.45rem;
+    }
+
+    /* Pot count */
+    .routine-pot { text-align: center; padding: 0.2rem 0 0.4rem; }
+    .routine-pot-count { font-size: 1.4rem; font-weight: 700; }
+    .routine-pot-label { font-size: 0.6rem; opacity: 0.45; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* Hole cards + phase box */
+    .routine-footer { display: flex; gap: 0.75rem; padding: 0 1.25rem 0.4rem; align-items: stretch; }
+    .routine-hole-cards { display: flex; gap: 0.4rem; flex: 1; }
+    .hole-card {
+      background: #fff; color: #000; border-radius: 14px;
+      padding: 0.65rem 0.85rem; flex: 1; display: flex;
+      flex-direction: column; justify-content: center;
+    }
+    .hole-card-value { font-size: 1.55rem; font-weight: 800; line-height: 1; }
+    .hole-card-suit { font-size: 0.95rem; }
+    .hole-card-label { font-size: 0.56rem; opacity: 0.55; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.2rem; }
+    .phase-box {
+      background: var(--card-dark); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px; padding: 0.65rem 1rem;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-width: 95px;
+    }
+    .phase-box-label { font-size: 0.58rem; opacity: 0.55; text-transform: uppercase; letter-spacing: 0.04em; }
+    .phase-box-icon { font-size: 1.4rem; margin: 0.2rem 0; }
+    .phase-box-value { font-size: 0.85rem; font-weight: 700; }
+
+    /* Action buttons */
+    .routine-actions { display: flex; gap: 0.75rem; padding: 0.4rem 1.25rem 1rem; }
+    .routine-action-btn {
+      flex: 1; height: 54px; border-radius: 27px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.07); color: #fff;
+      font-size: 0.92rem; font-weight: 600;
+      cursor: pointer; font-family: inherit; transition: all 0.2s;
+    }
+    .routine-action-btn:active { transform: scale(0.97); }
+    .routine-action-btn.primary { background: rgba(125,211,252,0.18); border-color: rgba(125,211,252,0.4); }
+    .routine-action-icon-btn {
+      width: 54px; height: 54px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.07); color: #fff;
+      font-size: 1.1rem; cursor: pointer; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: inherit; transition: all 0.2s;
+    }
+    .routine-action-icon-btn:active { transform: scale(0.97); }
+
+    /* Completion screen */
+    .routine-complete-screen {
+      padding: 2rem 1.25rem; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    }
+    .complete-trophy { font-size: 5rem; }
+    .complete-title { font-size: 1.75rem; font-weight: 700; }
+    .complete-sub { opacity: 0.65; font-size: 0.9rem; }
+    .complete-stats {
+      background: var(--card-dark); border-radius: 16px;
+      padding: 1.25rem; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: center;
+    }
+    .stat-value { font-size: 1.5rem; font-weight: 700; }
+    .stat-label { font-size: 0.65rem; opacity: 0.55; text-transform: uppercase; }
+    .complete-btn {
+      padding: 1rem 2rem; background: rgba(125,211,252,0.2);
+      border: 1px solid rgba(125,211,252,0.45); border-radius: 28px;
+      color: #fff; font-size: 1rem; font-weight: 600;
+      cursor: pointer; font-family: inherit; transition: all 0.2s;
+    }
+    .complete-btn:hover { background: rgba(125,211,252,0.3); }
+
+    /* Rest screen between exercises */
+    .routine-rest-screen {
+      padding: 2rem 1.25rem; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+    }
+    .rest-emoji { font-size: 3rem; }
+    .rest-title { font-size: 1.3rem; font-weight: 700; }
+    .rest-next { font-size: 0.85rem; opacity: 0.65; }
+    .rest-countdown { font-size: 3rem; font-weight: 800; color: var(--accent); }
+    .rest-skip-btn {
+      padding: 0.75rem 2rem; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 28px;
+      color: #fff; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; font-family: inherit; margin-top: 0.5rem;
     }
   </style>
 </head>
@@ -644,6 +875,138 @@
         </div>
       </div>
     </section>
+    <!-- MORNING ROUTINE -->
+    <section class="section" id="morning-routine" style="padding:0;">
+      <div class="section-inner" style="padding:0;">
+
+        <!-- ── START SCREEN ────────────────────────── -->
+        <div id="rt-start" class="routine-start-screen">
+          <div class="routine-hero-emoji">🌅</div>
+          <div class="routine-hero-title">Morning Routine</div>
+          <div class="routine-hero-sub">15-min full-body mobility · 11 exercises · 12-week progression</div>
+
+          <!-- Week picker -->
+          <div class="week-picker">
+            <button class="week-pick-btn" id="rt-week-down">−</button>
+            <div class="week-pick-value">
+              <div class="week-pick-number" id="rt-week-display">1</div>
+              <div class="week-pick-label">Current Week</div>
+            </div>
+            <button class="week-pick-btn" id="rt-week-up">+</button>
+          </div>
+          <div id="rt-phase-chip" class="phase-chip">🌱 Foundation Phase · 50% tension · 2×30s holds</div>
+
+          <!-- Exercise preview list -->
+          <div class="exercise-list-preview" id="rt-preview-list"></div>
+
+          <button class="routine-begin-btn" id="rt-begin-btn">Begin Session</button>
+        </div>
+
+        <!-- ── ACTIVE SCREEN ──────────────────────── -->
+        <div id="rt-active" class="routine-active-screen hidden">
+
+          <!-- Roster row (all 11 exercises) -->
+          <div class="routine-roster" id="rt-roster"></div>
+
+          <!-- Progress count (poker: pot size) -->
+          <div class="routine-pot">
+            <div class="routine-pot-count" id="rt-progress-count">1 / 11</div>
+            <div class="routine-pot-label">Exercise</div>
+          </div>
+
+          <!-- Exercise card (poker: community cards) -->
+          <div class="routine-board">
+            <div class="exercise-card">
+              <div class="exercise-header">
+                <div class="exercise-emoji-big" id="rt-ex-emoji">🔄</div>
+                <div>
+                  <div class="exercise-name-text" id="rt-ex-name">Cervical CARs</div>
+                  <div class="exercise-body-part" id="rt-ex-part">Neck</div>
+                </div>
+              </div>
+
+              <div class="timer-ring-wrap">
+                <svg class="timer-ring" viewBox="0 0 110 110">
+                  <circle class="timer-ring-bg" cx="55" cy="55" r="45"/>
+                  <circle class="timer-ring-progress" id="rt-ring" cx="55" cy="55" r="45"/>
+                </svg>
+                <div class="timer-center">
+                  <div class="timer-time-text" id="rt-timer-display">0:45</div>
+                  <div class="timer-sub-text">remaining</div>
+                </div>
+              </div>
+
+              <ul class="step-list" id="rt-step-list"></ul>
+            </div>
+          </div>
+
+          <!-- Footer: hole cards + phase box (poker-style) -->
+          <div class="routine-footer">
+            <div class="routine-hole-cards">
+              <div class="hole-card">
+                <div class="hole-card-value" id="rt-hc-num">1</div>
+                <div class="hole-card-suit">♠</div>
+                <div class="hole-card-label">exercise</div>
+              </div>
+              <div class="hole-card">
+                <div class="hole-card-value" id="rt-hc-dur">45</div>
+                <div class="hole-card-suit">s</div>
+                <div class="hole-card-label">seconds</div>
+              </div>
+            </div>
+            <div class="phase-box">
+              <div class="phase-box-label" id="rt-phase-label">Phase</div>
+              <div class="phase-box-icon" id="rt-phase-icon">🌱</div>
+              <div class="phase-box-value" id="rt-phase-value">Foundation</div>
+            </div>
+          </div>
+
+          <!-- Action buttons (poker: Call / Raise / Up) -->
+          <div class="routine-actions">
+            <button class="routine-action-btn primary" id="rt-pause-btn">Pause</button>
+            <button class="routine-action-btn" id="rt-skip-btn">Skip →</button>
+            <button class="routine-action-icon-btn" id="rt-back-btn" title="Back to start">↑</button>
+          </div>
+        </div>
+
+        <!-- ── REST SCREEN (between exercises) ───── -->
+        <div id="rt-rest" class="routine-rest-screen hidden">
+          <div class="rest-emoji">✅</div>
+          <div class="rest-title" id="rt-rest-done-name">Done!</div>
+          <div class="rest-next" id="rt-rest-next-name">Next: Shoulder CARs</div>
+          <div class="rest-countdown" id="rt-rest-timer">3</div>
+          <button class="rest-skip-btn" id="rt-rest-skip-btn">Start Now</button>
+        </div>
+
+        <!-- ── COMPLETE SCREEN ────────────────────── -->
+        <div id="rt-complete" class="routine-complete-screen hidden">
+          <div class="complete-trophy">🏆</div>
+          <div class="complete-title">Session Complete!</div>
+          <div class="complete-sub">Outstanding work. Consistency is everything.</div>
+          <div class="complete-stats">
+            <div>
+              <div class="stat-value">11</div>
+              <div class="stat-label">Exercises</div>
+            </div>
+            <div>
+              <div class="stat-value">~15</div>
+              <div class="stat-label">Minutes</div>
+            </div>
+            <div>
+              <div class="stat-value" id="rt-complete-week">1</div>
+              <div class="stat-label">Week</div>
+            </div>
+            <div>
+              <div class="stat-value" id="rt-complete-streak">0</div>
+              <div class="stat-label">Day Streak</div>
+            </div>
+          </div>
+          <button class="complete-btn" id="rt-complete-btn">Done</button>
+        </div>
+
+      </div>
+    </section>
+
   </div> <!-- end page-wrap -->
 
   <!-- BOTTOM NAV BAR -->
@@ -652,6 +1015,7 @@
     <div class="nav-item" data-target="mobility"><span>🧘</span>Mobility</div>
     <div class="nav-item" data-target="light-yoga-folder"><span>🌿</span>Yoga</div>
     <div class="nav-item" data-target="nsdr"><span>💤</span>NSDR</div>
+    <div class="nav-item" data-target="morning-routine"><span>🌅</span>Routine</div>
   </div>
 
   <script>
@@ -795,6 +1159,426 @@
         startTimer(btn, duration);
       });
     });
+
+    /* ==============================
+       MORNING ROUTINE ENGINE
+       ============================== */
+    (function MorningRoutine() {
+
+      /* ---- Exercise Data ---- */
+      const EXERCISES = [
+        {
+          id: 1, name: 'Cervical CARs', emoji: '🔄', bodyPart: 'Neck', duration: 45,
+          steps: [
+            'Stand tall, fists clenched at sides — create full-body tension.',
+            'Draw the largest circle with your nose: chin to chest → ear to shoulder → head back → other ear to shoulder → return.',
+            '8–10 sec per circle. Perform 2 circles clockwise, 2 counterclockwise.'
+          ]
+        },
+        {
+          id: 2, name: 'Shoulder CARs', emoji: '💪', bodyPart: 'Shoulders', duration: 75,
+          steps: [
+            'Stand tall. Make a fist with one hand, lock the elbow straight.',
+            'Trace the largest possible circle: forward → overhead → behind body → forward.',
+            '~8 sec per circle. 3 forward, 3 backward per arm.',
+            'Clench opposite fist and brace your core throughout.'
+          ]
+        },
+        {
+          id: 3, name: 'Wrist CARs', emoji: '🤜', bodyPart: 'Wrists', duration: 30,
+          steps: [
+            'Extend both arms in front of you. Make fists.',
+            'Perform slow maximal circles at the wrists — both simultaneously.',
+            '5 clockwise, 5 counterclockwise.'
+          ]
+        },
+        {
+          id: 4, name: 'Thoracic CARs', emoji: '🐱', bodyPart: 'Thoracic Spine', duration: 75,
+          steps: [
+            'On hands and knees: hands under shoulders, knees under hips.',
+            '4 slow cat-cow cycles — curl spine up (cat), extend through each vertebra (cow). 5–8 sec per direction.',
+            'Lock lumbar, isolate thoracic — 4 additional cycles.',
+            '3 thoracic rotations per side: hand behind head, rotate chest to ceiling.'
+          ]
+        },
+        {
+          id: 5, name: 'Hip CARs', emoji: '🦵', bodyPart: 'Hips', duration: 90,
+          steps: [
+            'Stand on one leg, hand on wall for balance, opposite fist clenched.',
+            'Lift knee to hip height. Draw the largest circle: external rotation → extend behind → sweep back.',
+            '~7 sec per circle. 3 forward, 3 backward per leg.',
+            'Pelvis must stay completely still — motion comes only from the hip joint.'
+          ]
+        },
+        {
+          id: 6, name: 'Ankle CARs', emoji: '🌀', bodyPart: 'Ankles', duration: 30,
+          steps: [
+            'Stand on one leg. Lift opposite foot slightly off the ground.',
+            'Draw maximal circles with your toes — move slowly.',
+            '5 each direction per ankle: dorsiflexion → inversion → plantarflexion → eversion.'
+          ]
+        },
+        {
+          id: 7, name: "World's Greatest Stretch", emoji: '🌍', bodyPart: 'Full Body', duration: 150,
+          steps: [
+            'Step right foot forward into a deep lunge, back knee hovering.',
+            'Step 1 — Both hands inside right foot. Hold 3 sec.',
+            'Step 2 — Drive right elbow toward the arch of your foot. Hold 3 sec.',
+            'Step 3 — Rotate torso right, reach arm to ceiling. Follow with eyes. Hold 3 sec.',
+            'Step 4 — Straighten front leg, fold forward for hamstring. Hold 2 sec.',
+            'Repeat on left side. Perform 5 reps per side.'
+          ]
+        },
+        {
+          id: 8, name: '90/90 Hip Transitions', emoji: '♻️', bodyPart: 'Hips', duration: 60,
+          steps: [
+            'Sit: both knees bent 90°. Front leg externally rotated, back leg internally rotated.',
+            'Sweep both knees to the opposite side in one fluid motion (windshield-wiper).',
+            'Pause 3 sec in each 90/90 position. Perform 8–10 total transitions.',
+            'Keep torso upright — do not collapse into lower back.'
+          ]
+        },
+        {
+          id: 9, name: 'Ankle Dorsiflexion', emoji: '🦶', bodyPart: 'Ankles', duration: 120,
+          steps: [
+            'Half-kneeling: right knee down, left foot flat in front, knee 90°.',
+            'Drive left knee forward over toes — heel stays flat on ground.',
+            'Feel the stretch in the front of your ankle. Hold end-range 60 sec per side.',
+            'Advanced (wk 5+): Push ball of foot into floor 5 sec (20% effort), relax and drive deeper.'
+          ]
+        },
+        {
+          id: 10, name: 'Open Book Rotation', emoji: '📖', bodyPart: 'Thoracic Spine', duration: 120,
+          steps: [
+            'Lie on your side. Stack knees at 90° — hip locked to prevent lumbar rotation.',
+            'Extend top arm forward, rotate it overhead and behind — chest opens to ceiling, follow with eyes.',
+            'Bottom knee must stay pressed to top knee throughout.',
+            'Hold fully open position 60 sec per side.',
+            'Advanced (wk 5+): Press top hand into floor 5 sec, relax and rotate deeper.'
+          ]
+        },
+        {
+          id: 11, name: null, emoji: null, bodyPart: 'Hip Flexors', duration: 150,
+          isAlternating: true,
+          variants: [
+            {
+              name: 'Couch Stretch', emoji: '🛋️', oddDay: true,
+              steps: [
+                'Kneel facing away from couch. Rear foot rests on top of couch behind you.',
+                'Front foot flat, knee bent 90°.',
+                'Squeeze trailing glute hard. Tuck pelvis, drive hips forward.',
+                'Feel stretch at front of hip. Hold 75 sec per side.',
+                'Advanced (wk 5+): Push rear knee into couch 5 sec, relax and sink deeper.'
+              ]
+            },
+            {
+              name: 'Supine Figure-4', emoji: '🧘', oddDay: false,
+              steps: [
+                'Lie on your back. Cross one ankle over opposite knee (figure-4 shape).',
+                'Pull bottom knee toward your chest — feel deep stretch in crossed hip.',
+                'Hold 75 sec per side.',
+                'Advanced (wk 5+): Push crossed knee away 5 sec, relax and pull deeper toward chest.'
+              ]
+            }
+          ]
+        }
+      ];
+
+      const PHASES = [
+        { weeks: [1,4],  name: 'Foundation',  icon: '🌱', tension: '50%',     holds: '2×30s', pnf: 'None' },
+        { weeks: [5,8],  name: 'Development', icon: '🔥', tension: '70–80%',  holds: '2×45s', pnf: '30–50%' },
+        { weeks: [9,12], name: 'Advancement', icon: '⚡', tension: '90–100%', holds: '2×60s', pnf: '50–75%' }
+      ];
+
+      const CIRCUMFERENCE = 2 * Math.PI * 45; // r=45 → ~283
+
+      /* ---- State ---- */
+      let currentWeek    = parseInt(localStorage.getItem('rt-week') || '1', 10);
+      let currentIdx     = 0;
+      let timeRemaining  = 0;
+      let totalTime      = 0;
+      let timerHandle    = null;
+      let isPaused       = false;
+      let restHandle     = null;
+      let restRemaining  = 0;
+
+      /* ---- Helpers ---- */
+      function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+      function saveWeek(w) {
+        currentWeek = clamp(w, 1, 12);
+        localStorage.setItem('rt-week', currentWeek);
+      }
+
+      function getPhase(week) {
+        return PHASES.find(p => week >= p.weeks[0] && week <= p.weeks[1]) || PHASES[0];
+      }
+
+      function resolveExercise(idx) {
+        const ex = EXERCISES[idx];
+        if (!ex.isAlternating) return ex;
+        const dayOfMonth = new Date().getDate();
+        const variant = (dayOfMonth % 2 === 1) ? ex.variants[0] : ex.variants[1];
+        return { ...ex, name: variant.name, emoji: variant.emoji, steps: variant.steps };
+      }
+
+      function formatTime(seconds) {
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        return m > 0 ? `${m}:${String(s).padStart(2, '0')}` : `0:${String(s).padStart(2, '0')}`;
+      }
+
+      function formatDur(seconds) {
+        if (seconds >= 60) {
+          const m = Math.floor(seconds / 60);
+          const s = seconds % 60;
+          return s === 0 ? `${m}m` : `${m}m ${s}s`;
+        }
+        return `${seconds}s`;
+      }
+
+      /* ---- DOM refs ---- */
+      const $  = id => document.getElementById(id);
+      const rtStart      = $('rt-start');
+      const rtActive     = $('rt-active');
+      const rtRest       = $('rt-rest');
+      const rtComplete   = $('rt-complete');
+      const rtRing       = $('rt-ring');
+      const rtTimerDisp  = $('rt-timer-display');
+      const rtProgressCt = $('rt-progress-count');
+      const rtExEmoji    = $('rt-ex-emoji');
+      const rtExName     = $('rt-ex-name');
+      const rtExPart     = $('rt-ex-part');
+      const rtStepList   = $('rt-step-list');
+      const rtHcNum      = $('rt-hc-num');
+      const rtHcDur      = $('rt-hc-dur');
+      const rtPhaseLabel = $('rt-phase-label');
+      const rtPhaseIcon  = $('rt-phase-icon');
+      const rtPhaseValue = $('rt-phase-value');
+      const rtPauseBtn   = $('rt-pause-btn');
+      const rtSkipBtn    = $('rt-skip-btn');
+      const rtBackBtn    = $('rt-back-btn');
+      const rtBeginBtn   = $('rt-begin-btn');
+      const rtWeekDown   = $('rt-week-down');
+      const rtWeekUp     = $('rt-week-up');
+      const rtWeekDisp   = $('rt-week-display');
+      const rtPhaseChip  = $('rt-phase-chip');
+      const rtRoster     = $('rt-roster');
+      const rtPreview    = $('rt-preview-list');
+      const rtRestTimer  = $('rt-rest-timer');
+      const rtRestDone   = $('rt-rest-done-name');
+      const rtRestNext   = $('rt-rest-next-name');
+      const rtRestSkip   = $('rt-rest-skip-btn');
+      const rtCompleteWk = $('rt-complete-week');
+      const rtCompleteStr= $('rt-complete-streak');
+      const rtCompleteBtn= $('rt-complete-btn');
+
+      /* ---- Screen switcher ---- */
+      function showScreen(which) {
+        [rtStart, rtActive, rtRest, rtComplete].forEach(el => el.classList.add('hidden'));
+        which.classList.remove('hidden');
+      }
+
+      /* ---- Render start screen ---- */
+      function renderStartScreen() {
+        rtWeekDisp.textContent = currentWeek;
+        const phase = getPhase(currentWeek);
+        rtPhaseChip.textContent = `${phase.icon} ${phase.name} Phase · ${phase.tension} tension · ${phase.holds} holds`;
+
+        rtPreview.innerHTML = EXERCISES.map(ex => {
+          const resolved = resolveExercise(EXERCISES.indexOf(ex));
+          return `<div class="exercise-preview-item">
+            <div class="ep-emoji">${resolved.emoji}</div>
+            <div class="ep-info">
+              <div class="ep-name">${resolved.name}</div>
+            </div>
+            <div class="ep-duration-badge">${formatDur(ex.duration)}</div>
+          </div>`;
+        }).join('');
+      }
+
+      /* ---- Render roster ---- */
+      function renderRoster(currentExIdx) {
+        rtRoster.innerHTML = EXERCISES.map((ex, i) => {
+          const resolved = resolveExercise(i);
+          const isCurrent = i === currentExIdx;
+          const isDone = i < currentExIdx;
+          return `<div class="roster-item ${isCurrent ? 'current' : ''} ${isDone ? 'done' : ''}">
+            <div class="roster-avatar">
+              ${resolved.emoji}
+              ${isCurrent ? '<div class="roster-indicator">▶</div>' : ''}
+            </div>
+            <div class="roster-dur">${ex.duration}s</div>
+            <div class="roster-label">${resolved.name.split(' ')[0]}</div>
+          </div>`;
+        }).join('');
+
+        // Scroll current into view
+        const items = rtRoster.querySelectorAll('.roster-item');
+        if (items[currentExIdx]) {
+          items[currentExIdx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      }
+
+      /* ---- Load exercise into active screen ---- */
+      function loadExercise(idx) {
+        const ex = resolveExercise(idx);
+        const phase = getPhase(currentWeek);
+
+        currentIdx    = idx;
+        timeRemaining = ex.duration;
+        totalTime     = ex.duration;
+
+        renderRoster(idx);
+        rtProgressCt.textContent = `${idx + 1} / ${EXERCISES.length}`;
+        rtExEmoji.textContent    = ex.emoji;
+        rtExName.textContent     = ex.name;
+        rtExPart.textContent     = ex.bodyPart;
+        rtHcNum.textContent      = idx + 1;
+        rtHcDur.textContent      = ex.duration;
+        rtPhaseLabel.textContent = `Wk ${currentWeek}`;
+        rtPhaseIcon.textContent  = phase.icon;
+        rtPhaseValue.textContent = phase.name;
+
+        rtStepList.innerHTML = ex.steps.map(s =>
+          `<li class="step-item"><div class="step-dot"></div><span>${s}</span></li>`
+        ).join('');
+
+        updateRing(timeRemaining, totalTime);
+        rtTimerDisp.textContent = formatTime(timeRemaining);
+      }
+
+      /* ---- Update SVG ring ---- */
+      function updateRing(remaining, total) {
+        const progress = total > 0 ? remaining / total : 0;
+        const offset = CIRCUMFERENCE * (1 - progress);
+        rtRing.style.strokeDashoffset = offset;
+        rtRing.classList.remove('warn', 'urgent');
+        if (remaining <= 10) rtRing.classList.add('urgent');
+        else if (remaining <= 15) rtRing.classList.add('warn');
+      }
+
+      /* ---- Timer ---- */
+      function startTimer() {
+        clearInterval(timerHandle);
+        isPaused = false;
+        rtPauseBtn.textContent = 'Pause';
+
+        timerHandle = setInterval(() => {
+          if (isPaused) return;
+          timeRemaining--;
+          rtTimerDisp.textContent = formatTime(timeRemaining);
+          updateRing(timeRemaining, totalTime);
+
+          if (timeRemaining <= 0) {
+            clearInterval(timerHandle);
+            if (currentIdx + 1 < EXERCISES.length) {
+              startRest();
+            } else {
+              showComplete();
+            }
+          }
+        }, 1000);
+      }
+
+      function pauseResume() {
+        isPaused = !isPaused;
+        rtPauseBtn.textContent = isPaused ? 'Resume' : 'Pause';
+        rtPauseBtn.classList.toggle('primary', !isPaused);
+      }
+
+      /* ---- Rest between exercises ---- */
+      function startRest() {
+        clearInterval(timerHandle);
+        restRemaining = 3;
+        const doneName  = resolveExercise(currentIdx).name;
+        const nextName  = currentIdx + 1 < EXERCISES.length ? resolveExercise(currentIdx + 1).name : '';
+        rtRestDone.textContent = `✅ ${doneName} complete`;
+        rtRestNext.textContent = `Next: ${nextName}`;
+        rtRestTimer.textContent = restRemaining;
+        showScreen(rtRest);
+
+        restHandle = setInterval(() => {
+          restRemaining--;
+          rtRestTimer.textContent = restRemaining;
+          if (restRemaining <= 0) {
+            clearInterval(restHandle);
+            advanceExercise();
+          }
+        }, 1000);
+      }
+
+      function advanceExercise() {
+        clearInterval(restHandle);
+        const nextIdx = currentIdx + 1;
+        if (nextIdx >= EXERCISES.length) {
+          showComplete();
+        } else {
+          showScreen(rtActive);
+          loadExercise(nextIdx);
+          startTimer();
+        }
+      }
+
+      /* ---- Complete ---- */
+      function showComplete() {
+        clearInterval(timerHandle);
+        clearInterval(restHandle);
+        const streak = parseInt(localStorage.getItem('streak') || '0', 10);
+        rtCompleteWk.textContent  = currentWeek;
+        rtCompleteStr.textContent = streak;
+        showScreen(rtComplete);
+      }
+
+      /* ---- Skip ---- */
+      function skipExercise() {
+        clearInterval(timerHandle);
+        clearInterval(restHandle);
+        if (currentIdx + 1 < EXERCISES.length) {
+          startRest();
+        } else {
+          showComplete();
+        }
+      }
+
+      /* ---- Back to start ---- */
+      function backToStart() {
+        clearInterval(timerHandle);
+        clearInterval(restHandle);
+        isPaused = false;
+        showScreen(rtStart);
+        renderStartScreen();
+      }
+
+      /* ---- Begin session ---- */
+      function beginSession() {
+        currentIdx = 0;
+        showScreen(rtActive);
+        loadExercise(0);
+        startTimer();
+      }
+
+      /* ---- Wire up events ---- */
+      rtBeginBtn.addEventListener('click', beginSession);
+      rtPauseBtn.addEventListener('click', pauseResume);
+      rtSkipBtn.addEventListener('click', skipExercise);
+      rtBackBtn.addEventListener('click', backToStart);
+      rtRestSkip.addEventListener('click', advanceExercise);
+      rtCompleteBtn.addEventListener('click', backToStart);
+
+      rtWeekDown.addEventListener('click', () => {
+        saveWeek(currentWeek - 1);
+        renderStartScreen();
+      });
+      rtWeekUp.addEventListener('click', () => {
+        saveWeek(currentWeek + 1);
+        renderStartScreen();
+      });
+
+      /* ---- Init ---- */
+      renderStartScreen();
+
+    })();
 
     /* ------------------------------
        SERVICE WORKER (PWA)
