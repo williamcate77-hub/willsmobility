@@ -321,7 +321,7 @@
       right: 0;
       height: var(--bottom-nav-height);
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       background: rgba(15, 23, 42, 0.92);
       border-top: 1px solid rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(10px);
@@ -588,175 +588,7 @@
       <div class="hero-sub">Short guided routines to keep you moving and balanced daily.</div>
       <div class="streak-banner" id="streakBanner">Day streak: 0</div>
 
-      <!-- Timer Module -->
-      <div class="timer-module">
-        <div class="timer-title">Insight and Exercise Timer</div>
-        <div class="timer-buttons">
-          <button class="timer-btn" data-duration="10" aria-label="10 minute timer">
-            10<br>Minutes
-          </button>
-          <button class="timer-btn" data-duration="20" aria-label="20 minute timer">
-            20<br>Minutes
-          </button>
-          <button class="timer-btn" data-duration="30" aria-label="30 minute timer">
-            30<br>Minutes
-          </button>
-        </div>
-      </div>
     </header>
-
-    <!-- MOBILITY -->
-    <section class="section" id="mobility">
-      <div class="section-inner">
-        <div class="section-header">
-          <div class="section-title">Mobility</div>
-          <div class="section-sub">Warm-ups and progressions to loosen joints and build resilience.</div>
-        </div>
-
-        <div class="tiles">
-          <div class="carousel-group" id="beginner-folder">
-            <div class="carousel-note">Swipe through the beginner folder to pick your daily session.</div>
-            <div class="carousel" role="list">
-              <div class="media-block color-1" id="beginner-1" data-id="beginner-1" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-                <div class="media-shell">
-                  <iframe src="https://www.youtube.com/embed/vKh3tzSU6w0" title="Beginner Mobility 1" allowfullscreen></iframe>
-                </div>
-                <div class="media-overlay">
-                  <div class="media-label">Beginner</div>
-                  <div class="media-title">Gentle Wake-Up</div>
-                  <div class="media-cta">Tap to play</div>
-                </div>
-              </div>
-
-              <div class="media-block color-2" id="beginner-2" data-id="beginner-2" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-                <div class="media-shell">
-                  <iframe src="https://www.youtube.com/embed/DcNrDvXLgc0" title="Beginner Mobility 2" allowfullscreen></iframe>
-                </div>
-                <div class="media-overlay">
-                  <div class="media-label">Beginner</div>
-                  <div class="media-title">Foundations & Breath</div>
-                  <div class="media-cta">Tap to play</div>
-                </div>
-              </div>
-
-              <div class="media-block color-3" id="beginner-3" data-id="beginner-3" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-                <div class="media-shell">
-                  <iframe src="https://www.youtube.com/embed/kU_EUW2ZdqA" title="Beginner Mobility 3" allowfullscreen></iframe>
-                </div>
-                <div class="media-overlay">
-                  <div class="media-label">Beginner</div>
-                  <div class="media-title">Daily Joint Care</div>
-                  <div class="media-cta">Tap to play</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-group" id="intermediate-folder">
-            <div class="carousel-note">Swipe across to choose an intermediate flow for today.</div>
-            <div class="carousel" role="list">
-              <div class="media-block color-4" id="intermediate-1" data-id="intermediate-1" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-                <div class="media-shell">
-                  <iframe src="https://www.youtube.com/embed/gXs3GRt3QpY" title="Intermediate Mobility 1" allowfullscreen></iframe>
-                </div>
-                <div class="media-overlay">
-                  <div class="media-label">Intermediate</div>
-                  <div class="media-title">Dynamic Hips & Spine</div>
-                  <div class="media-cta">Tap to play</div>
-                </div>
-              </div>
-
-              <div class="media-block color-5" id="intermediate-2" data-id="intermediate-2" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-                <div class="media-shell">
-                  <iframe src="https://www.youtube.com/embed/O4rWml36V2M" title="Intermediate Mobility 2" allowfullscreen></iframe>
-                </div>
-                <div class="media-overlay">
-                  <div class="media-label">Intermediate</div>
-                  <div class="media-title">Full-Body Elasticity</div>
-                  <div class="media-cta">Tap to play</div>
-                </div>
-              </div>
-
-              <div class="media-block color-6" id="intermediate-3" data-id="intermediate-3" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-                <div class="media-shell">
-                  <iframe src="https://www.youtube.com/embed/m08osvKFl_0" title="Intermediate Mobility 3" allowfullscreen></iframe>
-                </div>
-                <div class="media-overlay">
-                  <div class="media-label">Intermediate</div>
-                  <div class="media-title">Athletic Range Builder</div>
-                  <div class="media-cta">Tap to play</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-group" id="advanced-folder">
-            <div class="carousel-note">Advanced folder: swipe to pick the challenge for the day.</div>
-            <div class="carousel" role="list">
-              <div class="media-block color-3" id="advanced-1" data-id="advanced-1" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-                <div class="media-shell">
-                  <iframe src="https://www.youtube.com/embed/up_tF1_jNuc" title="Advanced Mobility 1" allowfullscreen></iframe>
-                </div>
-                <div class="media-overlay">
-                  <div class="media-label">Advanced</div>
-                  <div class="media-title">Powerful Hip Flow</div>
-                  <div class="media-cta">Tap to play</div>
-                </div>
-              </div>
-
-              <div class="media-block color-1" id="advanced-2" data-id="advanced-2" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-                <div class="media-shell">
-                  <iframe src="https://www.youtube.com/embed/NidlwVlteps" title="Advanced Mobility 2" allowfullscreen></iframe>
-                </div>
-                <div class="media-overlay">
-                  <div class="media-label">Advanced</div>
-                  <div class="media-title">Strength & Control</div>
-                  <div class="media-cta">Tap to play</div>
-                </div>
-              </div>
-
-              <div class="media-block color-2" id="advanced-3" data-id="advanced-3" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-                <div class="media-shell">
-                  <iframe src="https://www.youtube.com/embed/GD5HNk-oDME" title="Advanced Mobility 3" allowfullscreen></iframe>
-                </div>
-                <div class="media-overlay">
-                  <div class="media-label">Advanced</div>
-                  <div class="media-title">Explosive Range</div>
-                  <div class="media-cta">Tap to play</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-group" id="light-yoga-folder">
-            <div class="carousel-note">Light Yoga folder: swipe to select a gentle add-on.</div>
-            <div class="carousel" role="list">
-              <div class="media-block color-1" id="yoga-1" data-id="yoga-1" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-                <div class="media-shell">
-                  <iframe src="https://www.youtube.com/embed/sGbsS4bIAiY" title="Beginner Yoga Flow" allowfullscreen></iframe>
-                </div>
-                <div class="media-overlay">
-                  <div class="media-label">Light Yoga</div>
-                  <div class="media-title">10-Min Beginner Flow</div>
-                  <div class="media-cta">Tap to play</div>
-                </div>
-              </div>
-
-              <div class="media-block color-2" id="yoga-2" data-id="yoga-2" tabindex="0" onclick="revealMedia(this)" onkeypress="handleKey(event, this)">
-                <div class="media-shell">
-                  <iframe src="https://www.youtube.com/embed/7EoqvZovBDw" title="Relaxing Stretch Flow" allowfullscreen></iframe>
-                </div>
-                <div class="media-overlay">
-                  <div class="media-label">Light Yoga</div>
-                  <div class="media-title">Relaxing Stretch Flow</div>
-                  <div class="media-cta">Tap to play</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- MEDITATION + NSDR -->
     <section class="section" id="nsdr">
@@ -1012,8 +844,6 @@
   <!-- BOTTOM NAV BAR -->
   <div class="bottom-nav">
     <div class="nav-item active" data-target="hero"><span>🏠</span>Home</div>
-    <div class="nav-item" data-target="mobility"><span>🧘</span>Mobility</div>
-    <div class="nav-item" data-target="light-yoga-folder"><span>🌿</span>Yoga</div>
     <div class="nav-item" data-target="nsdr"><span>💤</span>NSDR</div>
     <div class="nav-item" data-target="morning-routine"><span>🌅</span>Routine</div>
   </div>
